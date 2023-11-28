@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
+
 // axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 function ProductDetails() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-
+  console.log("product id",productId)
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -22,22 +24,42 @@ function ProductDetails() {
     fetchProduct();
   }, [productId]);
 
-  const handleAddToCart = async () => {
-    try {
-      await axios.post('http://localhost:8000/shopingCart', {
-        productId: product.id,
-        // Add other product details you want to store in the cart
-      });
+//   const handleAddToCart = async () => {
 
- // Show an alert when the product is successfully added to the cart
-      window.alert('Product added to cart successfully!');
+//     try {
+//       await axios.post(`http://localhost:5002/add-to-cart/${productId}`, {
+//         // productId: product.productId,
+//         // Add other product details you want to store in the cart
+//       });
 
-      console.log('Product added to cart successfully!');
-      // You may want to update the UI to reflect the change, e.g., show a confirmation message
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-    }
-  };
+//  // Show an alert when the product is successfully added to the cart
+//       window.alert('Product added to cart successfully!');
+
+//       console.log('Product added to cart successfully!');
+//       // You may want to update the UI to reflect the change, e.g., show a confirmation message
+//     } catch (error) {
+//       console.error('Error adding product to cart:', error);
+//     }
+//   };
+const addToCart = () => {
+  // Create an object with the product data
+  // const productData = {
+  //   "product_id": product.productId,
+
+  //   "user_id" : product.user_id,
+  //   // Add other properties as needed
+  // };
+
+  // Make a POST request to your shopping cart endpoint
+  axios
+    .post(`http://localhost:5002/add-to-cart/${productId}`)
+    .then((response) => {
+      console.log("Product added to cart:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error adding product to cart: ", error);
+    });
+};
 
   if (!product) {
     return <div>Loading...</div>;
@@ -58,7 +80,7 @@ function ProductDetails() {
             <div className="flex -mx-2 mb-4">
               <div className="w-1/2 px-2">
                 <button
-                  onClick={handleAddToCart}
+                  onClick={addToCart}
                   className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   Add to Cart

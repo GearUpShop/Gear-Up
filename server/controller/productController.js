@@ -1,6 +1,6 @@
 const Product = require('../model/Product Model');
 const Image = require('../model/Image Model');
-
+const Cart = require('../model/Cart Model');
 exports.addProduct = async (req, res) => {
     try {
         const { name, title, description, price, rating, category, isDeleted, isTopSelling } = req.body;
@@ -270,3 +270,59 @@ exports.getProductWithImage = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+
+exports.addToCart = async (req, res) => {
+    try {
+        const  userId = req.user._id;
+        const {productId}  = req.params;
+        
+
+        // Check if the item is already in the cart
+        const existingCartItem = await Cart.findOne({ userId, productId });
+
+        if (existingCartItem) {
+            // If the item is already in the cart, you may want to update the quantity or handle it accordingly
+            // For simplicity, this example assumes each item is unique in the cart
+            return res.status(400).json({ message: 'Item already in the cart' });
+        }
+
+        // Add item to the cart
+        const cartItem = new Cart({ userId, productId });
+        await cartItem.save();
+
+        res.status(201).json({ message: 'Item added to the cart successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+exports.addToWishlist = async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const productId = req.params.productId;
+  
+      const user = await User.findById(userId);
+      const product = await Product.findById(productId);
+  
+      if (!user || !product) {
+        return res.status(404).json({ error: 'User or product not found' });
+      }
+  
+      const existingWishlistItem = await Wishlist.findOne({ userId, productId });
+  
+      if (existingWishlistItem) {
+        return res.status(400).json({ error: 'Product already in the wishlist' });
+      }
+  
+      const wishlistItem = new Wishlist({ userId, productId });
+      await wishlistItem.save();
+  
+      return res.status(201).json({ message: 'Product added to wishlist successfully' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
+  
