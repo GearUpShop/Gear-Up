@@ -381,3 +381,21 @@ exports.getProductDetails = async (req, res) => {
       }
     };
     
+    exports.deleteProductFromCart = async (req, res) => {
+        try {
+            const  userId = req.user._id;
+            const productId = req.params.productId; 
+      
+          // Find the cart item to delete
+          const cartItem = await Cart.findOneAndDelete({ userId, 'productId': productId });
+      
+          if (!cartItem) {
+            return res.status(404).json({ message: 'Product not found in the cart' });
+          }
+      
+          res.json({ message: 'Product successfully removed from the cart' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: 'Internal Server Error' });
+        }
+      };

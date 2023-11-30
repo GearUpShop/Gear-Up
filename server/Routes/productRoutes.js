@@ -18,5 +18,6 @@ router.post('/carts',authorization.authorize ,productController.getAllCarts);
 
 router.get('/det/:productId', productController.getProductDetails);
 router.get('/Car',authorization.authorize, productController.getCartProducts);
+router.delete('/cart/:productId',authorization.authorize ,productController.deleteProductFromCart);
 
 module.exports = router;
