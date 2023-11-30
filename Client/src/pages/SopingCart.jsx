@@ -8,15 +8,16 @@ function ShoppingCart() {
   const [itemQuantities, setItemQuantities] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/Products');
+        const response = await axios.get('http://localhost:5002/Car');
         const defaultQuantities = {};
-        response.data.forEach(item => {
+        response.data.forEach((item) => {
           defaultQuantities[item.id] = 1;
         });
         setItemQuantities(defaultQuantities);
         setCartItems(response.data);
+        console.log("Cart ", response);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -46,14 +47,26 @@ function ShoppingCart() {
     });
   };
 
-  const handleRemoveItem = (itemId) => {
-    setCartItems((prevCartItems) => {
-      const updatedCartItems = prevCartItems.filter((item) => item.id !== itemId);
-      const updatedQuantities = { ...itemQuantities };
-      delete updatedQuantities[itemId];
-      setItemQuantities(updatedQuantities);
-      return updatedCartItems;
-    });
+  const handleRemoveItem = async (itemId) => {
+    try {
+      // Make an Axios delete request to remove the item with itemId
+      await axios.delete(`http://localhost:5002/Car/${itemId}`);
+
+      // Update the state to reflect the removed item
+      setCartItems((prevCartItems) =>
+        prevCartItems.filter((item) => item.id !== itemId)
+      );
+
+      setItemQuantities((prevQuantities) => {
+        const updatedQuantities = { ...prevQuantities };
+        delete updatedQuantities[itemId];
+        return updatedQuantities;
+      });
+
+      console.log(`Item with ID ${itemId} removed successfully`);
+    } catch (error) {
+      console.error('Error removing item:', error);
+    }
   };
 
   return (
@@ -81,7 +94,7 @@ function ShoppingCart() {
                           <div className="flex items-center">
                             <img
                               className="h-16 w-16 mr-4"
-                              src={item.image}
+                              src={item.imageUrl}
                               alt="Product image"
                             />
                             <span className="font-semibold">{item.name}</span>
@@ -105,7 +118,9 @@ function ShoppingCart() {
                             </button>
                           </div>
                         </td>
-                        <td className="py-4">${(parseFloat(item.price) * itemQuantities[item.id]).toFixed(2)}</td>
+                        <td className="py-4">
+                          ${(parseFloat(item.price) * itemQuantities[item.id]).toFixed(2)}
+                        </td>
                         <td className="py-4">
                           <button
                             className="border rounded-md py-2 px-4 ml-2"
@@ -134,9 +149,9 @@ function ShoppingCart() {
                   <span className="font-semibold">${calculateTotal()}</span>
                 </div>
                 <Link to='/payment'>
-                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
-                  Checkout
-                </button>
+                  <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
+                    Checkout
+                  </button>
                 </Link>
               </div>
             </div>
@@ -148,4 +163,5 @@ function ShoppingCart() {
 }
 
 export default ShoppingCart;
+
 

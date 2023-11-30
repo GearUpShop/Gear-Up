@@ -1,6 +1,6 @@
 const Product = require('../model/Product Model');
 const Image = require('../model/Image Model');
-
+const Cart = require('../model/Cart Model');
 exports.addProduct = async (req, res) => {
     try {
         const { name, title, description, price, rating, category, isDeleted, isTopSelling } = req.body;
@@ -236,30 +236,7 @@ exports.getProductWithImage = async (req, res) => {
             return res.status(400).json({ message: "Product ID is required" });
         }
 
-        const productWithImage = await Product.aggregate([
-            {
-                $match: {  isDeleted: false }
-            },
-            {
-                $lookup: {
-                    from: 'images', // The name of the image table
-                    localField: '_id',
-                    foreignField: 'productId',
-                    as: 'image'
-                }
-            },
-            {
-                $project: {
-                    name: 1,
-                    title: 1,
-                    description: 1,
-                    price: 1,
-                    rating: 1,
-                    category: 1,
-                    'image.imageUrl': 1
-                }
-            }
-        ]);
+
 
         if (productWithImage.length === 0) {
             return res.status(404).json({ message: "Product not found" });
@@ -270,3 +247,137 @@ exports.getProductWithImage = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+
+exports.addToCart = async (req, res) => {
+    try {
+        const  userId = req.user._id;
+        const {productId}  = req.params;
+        
+
+        // Check if the item is already in the cart
+        const existingCartItem = await Cart.findOne({ userId, productId });
+
+        if (existingCartItem) {
+            // If the item is already in the cart, you may want to update the quantity or handle it accordingly
+            // For simplicity, this example assumes each item is unique in the cart
+            return res.status(400).json({ message: 'Item already in the cart' });
+        }
+
+        // Add item to the cart
+        const cartItem = new Cart({ userId, productId });
+        await cartItem.save();
+
+        res.status(201).json({ message: 'Item added to the cart successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+exports.addToWishlist = async (req, res) => {
+    try {
+        const  userId = req.user._id;
+        const {productId}  = req.params;
+
+      const user = await User.findById(userId);
+      const product = await Product.findById(productId);
+  
+      if (!user || !product) {
+        return res.status(404).json({ error: 'User or product not found' });
+      }
+  
+      const existingWishlistItem = await Wishlist.findOne({ userId, productId });
+  
+      if (existingWishlistItem) {
+        return res.status(400).json({ error: 'Product already in the wishlist' });
+      }
+  
+      const wishlistItem = new Wishlist({ userId, productId });
+      await wishlistItem.save();
+  
+      return res.status(201).json({ message: 'Product added to wishlist successfully' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
+  
+exports.getAllCarts = async (req, res) => {
+    const  userId = req.user._id;
+  try {
+    const carts = await Cart.find({}).populate('productId').populate(userId);
+    res.json({ success: true, carts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+
+exports.getProductDetails = async (req, res) => {
+    try {
+      const productId = req.params.productId;
+  
+      const productDetails = await Product.findById(productId);
+  
+      if (!productDetails) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+  
+      const images = await Image.find({ productId });
+  
+      const productWithImages = {
+        ...productDetails.toObject(),
+        images: images.map(image => image.imageUrl),
+      };
+  
+      res.json(productWithImages);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  exports. getCartProducts = async (req, res) => {
+    try {
+        const  userId = req.user._id;
+    
+        const cartItems = await Cart.find({ userId }).populate('productId');
+    
+        if (!cartItems || cartItems.length === 0) {
+          return res.status(404).json({ message: 'Cart is empty' });
+        }
+    
+        const productDetails = cartItems.map(cartItem => {
+          const { _id, name, price } = cartItem.productId;
+          const quantity = cartItem.quantity;
+    
+          return {
+            productId: _id,
+            name,
+            price,
+            quantity,
+          };
+        });
+    
+        const productIds = cartItems.map(cartItem => cartItem.productId._id);
+        const images = await Image.find({ productId: { $in: productIds } });
+    
+        const imageMap = {};
+        images.forEach(image => {
+          imageMap[image.productId.toString()] = image.imageUrl;
+        });
+    
+        const productDetailsWithImages = productDetails.map(productDetail => ({
+          ...productDetail,
+          imageUrl: imageMap[productDetail.productId.toString()],
+        }));
+    
+        res.json(productDetailsWithImages);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    };
+    
