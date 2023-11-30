@@ -1,6 +1,8 @@
 const Product = require('../model/Product Model');
 const Image = require('../model/Image Model');
 const Cart = require('../model/Cart Model');
+const User = require('../model/UserModel');
+const Wishlist = require('../model/Favorite Model')
 exports.addProduct = async (req, res) => {
     try {
         const { name, title, description, price, rating, category, isDeleted, isTopSelling } = req.body;
@@ -277,7 +279,7 @@ exports.addToCart = async (req, res) => {
 exports.addToWishlist = async (req, res) => {
     try {
         const  userId = req.user._id;
-        const {productId}  = req.params;
+        const productId = req.params.productId;
 
       const user = await User.findById(userId);
       const product = await Product.findById(productId);
@@ -399,3 +401,45 @@ exports.getProductDetails = async (req, res) => {
           res.status(500).json({ message: 'Internal Server Error' });
         }
       };
+
+      exports. getwishlistProducts = async (req, res) => {
+        try {
+            const  userId = req.user._id;
+        
+            const cartItems = await Wishlist.find({ userId }).populate('productId');
+        
+            if (!cartItems || cartItems.length === 0) {
+              return res.status(404).json({ message: 'Cart is empty' });
+            }
+        
+            const productDetails = cartItems.map(cartItem => {
+              const { _id, name, price } = cartItem.productId;
+              const quantity = cartItem.quantity;
+        
+              return {
+                productId: _id,
+                name,
+                price,
+                quantity,
+              };
+            });
+        
+            const productIds = cartItems.map(cartItem => cartItem.productId._id);
+            const images = await Image.find({ productId: { $in: productIds } });
+        
+            const imageMap = {};
+            images.forEach(image => {
+              imageMap[image.productId.toString()] = image.imageUrl;
+            });
+        
+            const productDetailsWithImages = productDetails.map(productDetail => ({
+              ...productDetail,
+              imageUrl: imageMap[productDetail.productId.toString()],
+            }));
+        
+            res.json(productDetailsWithImages);
+          } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+          }
+        };
