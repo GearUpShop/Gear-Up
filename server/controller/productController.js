@@ -385,7 +385,7 @@ exports.getProductDetails = async (req, res) => {
         try {
             const  userId = req.user._id;
             const productId = req.params.productId; 
-      
+            console.log("userId", userId ,productId)
           // Find the cart item to delete
           const cartItem = await Cart.findOneAndDelete({ userId, 'productId': productId });
       
