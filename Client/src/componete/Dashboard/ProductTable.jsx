@@ -8,7 +8,7 @@ function ProductTable() {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async () => {                                                                                                                                     
     try {
       const response = await axios.get('http://localhost:8000/Products');
       setProducts(response.data);

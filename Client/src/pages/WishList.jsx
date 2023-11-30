@@ -1,29 +1,50 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 
 function WishList() {
-  const [products, setProducts] = useState([]);
-
+  const { productId } = useParams();
+  console.log('productId:', productId);
+  const [product, setProduct] = useState([]);
+  
+  
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/Products');
-        console.log('Fetched data:', response.data);
-        setProducts(response.data);
+        const response = await axios.get(`http://localhost:5002/det/${productId}`);
+        console.log('Fetched product:', response.data);
+        setProduct(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching product details:', error);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchProduct();
+  }, [productId]);  
+
+  const addToCart = () => {
+
+    // Make a POST request to your shopping cart endpoint
+    axios
+      .post(`http://localhost:5002/add-to-cart/${productId}`)
+      .then((response) => {
+        console.log("Product added to cart:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart: ", error);
+      });
+  };
+  
+    if (!product) {
+      return <div>Loading...</div>;
+    }
 
   return (
     <div>
       <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
-          {products.map((product, index) => (
+          {product.map((product, index) => (
             <section
               key={index}
               className="p-5 py-10 bg-purple-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer"
@@ -47,6 +68,7 @@ function WishList() {
               <p className="mb-5">{product.description}</p>
               <h2 className="font-semibold mb-5">${product.price}</h2>
               <button className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">
+              onClick={addToCart}
                 Add To Cart
               </button>
             </section>
