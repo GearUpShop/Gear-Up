@@ -19,7 +19,7 @@ function ContactUs() {
 
     try {
       // Send a POST request to store data in the JSON file
-      await axios.post('http://localhost:8000/Products', formData);
+      await axios.post('http://localhost:5002/contact', formData);
 
       // Clear the form after successful submission
       setFormData({
