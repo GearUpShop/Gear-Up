@@ -47,7 +47,7 @@ const addToCart = () => {
 
    // Make a POST request to your WishList endpoint
     axios
-      .post(`http://localhost:5002/add-to-cart/${productId}`)
+      .post(`http://localhost:5002/add-to-wishlist/${productId}`)
       .then((response) => {
         console.log("Product added to WishList:", response.data);
       })
