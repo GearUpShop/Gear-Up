@@ -7,7 +7,7 @@ const productSchema = new Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     rating: { type: Number },
-    category: { type: String },
+    category: { type: String, enum: ['tools', 'cleaning', 'security', 'accessories', 'mobile', 'lights'], required: true },
     isDeleted: { type: Boolean, default: false },
     isTopSelling: { type: Boolean, default: false },
 });

@@ -10,13 +10,14 @@ function ShoppingCart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/Products');
+        const response = await axios.get('http://localhost:5002/Car');
         const defaultQuantities = {};
         response.data.forEach(item => {
           defaultQuantities[item.id] = 1;
         });
         setItemQuantities(defaultQuantities);
         setCartItems(response.data);
+        console.log("Cart ",response)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -81,7 +82,7 @@ function ShoppingCart() {
                           <div className="flex items-center">
                             <img
                               className="h-16 w-16 mr-4"
-                              src={item.image}
+                              src={item.imageUrl}
                               alt="Product image"
                             />
                             <span className="font-semibold">{item.name}</span>

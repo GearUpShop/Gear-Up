@@ -5,16 +5,17 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 
-// axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 function ProductDetails() {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  console.log("product id",productId)
+  console.log('productId:', productId);
+  const [product, setProduct] = useState([]);
+  
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5002/details/${productId}`);
-        console.log('Fetched product details:', response.data);
+        const response = await axios.get(`http://localhost:5002/det/${productId}`);
+        console.log('Fetched product:', response.data);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product details:', error);
@@ -24,31 +25,7 @@ function ProductDetails() {
     fetchProduct();
   }, [productId]);
 
-//   const handleAddToCart = async () => {
-
-//     try {
-//       await axios.post(`http://localhost:5002/add-to-cart/${productId}`, {
-//         // productId: product.productId,
-//         // Add other product details you want to store in the cart
-//       });
-
-//  // Show an alert when the product is successfully added to the cart
-//       window.alert('Product added to cart successfully!');
-
-//       console.log('Product added to cart successfully!');
-//       // You may want to update the UI to reflect the change, e.g., show a confirmation message
-//     } catch (error) {
-//       console.error('Error adding product to cart:', error);
-//     }
-//   };
 const addToCart = () => {
-  // Create an object with the product data
-  // const productData = {
-  //   "product_id": product.productId,
-
-  //   "user_id" : product.user_id,
-  //   // Add other properties as needed
-  // };
 
   // Make a POST request to your shopping cart endpoint
   axios
@@ -73,7 +50,7 @@ const addToCart = () => {
             <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
               <img
                 className="w-full h-full object-cover"
-                src={product.image[0].imageUrl}
+                src={product.images}
                 alt={product.name}
               />
             </div>
@@ -97,7 +74,7 @@ const addToCart = () => {
           </div>
           <div className="md:flex-1 px-4">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-              {product.title}
+              {product.name}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
               {product.description}

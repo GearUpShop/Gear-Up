@@ -13,6 +13,10 @@ router.get('/getProductsWithImage',productController.getProductsWithImage);
 router.put('/addOrUpdateImageUrl/:productId', productController.addOrUpdateImageUrl);
 router.get('/details/:productId', productController.getProductWithImage);
 router.post('/add-to-cart/:productId',authorization.authorize ,productController.addToCart);
+router.post('/add-to-wishlist/:productId',authorization.authorize ,productController.addToWishlist);
+router.post('/carts',authorization.authorize ,productController.getAllCarts);
 
+router.get('/det/:productId', productController.getProductDetails);
+router.get('/Car',authorization.authorize, productController.getCartProducts);
 
 module.exports = router;

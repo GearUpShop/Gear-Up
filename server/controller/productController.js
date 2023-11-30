@@ -236,30 +236,7 @@ exports.getProductWithImage = async (req, res) => {
             return res.status(400).json({ message: "Product ID is required" });
         }
 
-        const productWithImage = await Product.aggregate([
-            {
-                $match: {  isDeleted: false }
-            },
-            {
-                $lookup: {
-                    from: 'images', // The name of the image table
-                    localField: '_id',
-                    foreignField: 'productId',
-                    as: 'image'
-                }
-            },
-            {
-                $project: {
-                    name: 1,
-                    title: 1,
-                    description: 1,
-                    price: 1,
-                    rating: 1,
-                    category: 1,
-                    'image.imageUrl': 1
-                }
-            }
-        ]);
+
 
         if (productWithImage.length === 0) {
             return res.status(404).json({ message: "Product not found" });
@@ -299,9 +276,9 @@ exports.addToCart = async (req, res) => {
 
 exports.addToWishlist = async (req, res) => {
     try {
-      const userId = req.user.id;
-      const productId = req.params.productId;
-  
+        const  userId = req.user._id;
+        const {productId}  = req.params;
+
       const user = await User.findById(userId);
       const product = await Product.findById(productId);
   
@@ -326,3 +303,81 @@ exports.addToWishlist = async (req, res) => {
   };
   
   
+exports.getAllCarts = async (req, res) => {
+    const  userId = req.user._id;
+  try {
+    const carts = await Cart.find({}).populate('productId').populate(userId);
+    res.json({ success: true, carts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+
+exports.getProductDetails = async (req, res) => {
+    try {
+      const productId = req.params.productId;
+  
+      const productDetails = await Product.findById(productId);
+  
+      if (!productDetails) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+  
+      const images = await Image.find({ productId });
+  
+      const productWithImages = {
+        ...productDetails.toObject(),
+        images: images.map(image => image.imageUrl),
+      };
+  
+      res.json(productWithImages);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  exports. getCartProducts = async (req, res) => {
+    try {
+        const  userId = req.user._id;
+    
+        const cartItems = await Cart.find({ userId }).populate('productId');
+    
+        if (!cartItems || cartItems.length === 0) {
+          return res.status(404).json({ message: 'Cart is empty' });
+        }
+    
+        const productDetails = cartItems.map(cartItem => {
+          const { _id, name, price } = cartItem.productId;
+          const quantity = cartItem.quantity;
+    
+          return {
+            productId: _id,
+            name,
+            price,
+            quantity,
+          };
+        });
+    
+        const productIds = cartItems.map(cartItem => cartItem.productId._id);
+        const images = await Image.find({ productId: { $in: productIds } });
+    
+        const imageMap = {};
+        images.forEach(image => {
+          imageMap[image.productId.toString()] = image.imageUrl;
+        });
+    
+        const productDetailsWithImages = productDetails.map(productDetail => ({
+          ...productDetail,
+          imageUrl: imageMap[productDetail.productId.toString()],
+        }));
+    
+        res.json(productDetailsWithImages);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    };
+    
