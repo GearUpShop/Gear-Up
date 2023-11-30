@@ -124,7 +124,7 @@ function AboutUs() {
       </div>
       <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
         <img
-          src="https://i.postimg.cc/9MW8G96J/pexels-the-coach-space-2977565.jpg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSei8qvgxf1TWKeJRjpDstddWvkpWgw3m5AVw&usqp=CAU"
           alt=""
           className="relative z-40 object-cover w-full h-full rounded"
         />

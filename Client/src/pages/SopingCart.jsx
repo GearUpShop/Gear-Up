@@ -8,7 +8,7 @@ function ShoppingCart() {
   const [itemQuantities, setItemQuantities] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
       try {
         const response = await axios.get('http://localhost:8000/Products');
         const defaultQuantities = {};

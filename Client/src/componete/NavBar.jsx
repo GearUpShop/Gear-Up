@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+  
 
 function NavBar({isLoggedIn, setIsLoggedIn }) {
   
@@ -87,6 +87,7 @@ function NavBar({isLoggedIn, setIsLoggedIn }) {
                 </Link>
               </div>
               <a className="hover:text-gray-200" href="#">
+                <Link to='wishlist'>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -101,6 +102,7 @@ function NavBar({isLoggedIn, setIsLoggedIn }) {
                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                   />
                 </svg>
+                </Link>
               </a>
 
               {/* This is an example component */}
