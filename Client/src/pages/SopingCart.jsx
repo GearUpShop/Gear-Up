@@ -6,26 +6,32 @@ import { Link } from 'react-router-dom';
 function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
   const [itemQuantities, setItemQuantities] = useState({});
+  const [flag , setFlag] = useState(false)
+
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5002/Car');
-        const defaultQuantities = {};
-        response.data.forEach((item) => {
-          defaultQuantities[item.id] = 1;
-        });
-        setItemQuantities(defaultQuantities);
-        setCartItems(response.data);
-        console.log("Cart ", response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
+    console.log(flag);
     fetchData();
-  }, []);
+    console.log(flag);
+  }, [flag]); 
+  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5002/Car');
+      const defaultQuantities = {};
+      response.data.forEach((item) => {
+        defaultQuantities[item.id] = 1;
+      });
+      setItemQuantities(defaultQuantities);
+      setCartItems(response.data);
+      console.log("Cart ", response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
+  
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => total + parseFloat(item.price) * itemQuantities[item.id], 0).toFixed(2);
   };
@@ -40,34 +46,47 @@ function ShoppingCart() {
       const updatedQuantities = { ...prevQuantities };
       if (type === 'increase') {
         updatedQuantities[itemId] += 1;
-      } else if (type === 'decrease' && updatedQuantities[itemId] > 1) {
+      } else if (type === 'decrease' && updatedQuantities[itemId] > -1) {
         updatedQuantities[itemId] -= 1;
       }
       return updatedQuantities;
     });
   };
+  axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 
-  const handleRemoveItem = async (itemId) => {
-    try {
-      // Make an Axios delete request to remove the item with itemId
-      await axios.delete(`http://localhost:5002/Car/${itemId}`);
+  const handleRemoveItem = async (productId) => {
+  try {
+    console.log(productId);
+    // Make an Axios delete request to remove the item with itemId
+    await axios.delete(`http://localhost:5002/cart/${productId}`);
+    setCartItems([]);
+    // setItemQuantities({}); 
+    setFlag(!flag);
+  
+    // Update the state to reflect the removed item
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = [...prevCartItems];
+      const indexToRemove = updatedCartItems.findIndex((item) => item.id === productId);
+      if (indexToRemove !== 1) {
+        updatedCartItems.splice(indexToRemove, 1);
+      }
+      console.log(updatedCartItems);
+      return updatedCartItems;
+    });
 
-      // Update the state to reflect the removed item
-      setCartItems((prevCartItems) =>
-        prevCartItems.filter((item) => item.id !== itemId)
-      );
+    setItemQuantities((prevQuantities) => {
+      const updatedQuantities = { ...prevQuantities };
+      delete updatedQuantities[productId];
+      return updatedQuantities;
+    });
 
-      setItemQuantities((prevQuantities) => {
-        const updatedQuantities = { ...prevQuantities };
-        delete updatedQuantities[itemId];
-        return updatedQuantities;
-      });
+    console.log(flag);
+    console.log(`Item with ID ${productId} removed successfully`);
+  } catch (error) {
+    console.error('Error removing item:', error);
+  }
+};
 
-      console.log(`Item with ID ${itemId} removed successfully`);
-    } catch (error) {
-      console.error('Error removing item:', error);
-    }
-  };
 
   return (
     <div>
@@ -88,7 +107,7 @@ function ShoppingCart() {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartItems.map((item) => (
+                    {cartItems?.map((item) => (
                       <tr key={item.id}>
                         <td className="py-4">
                           <div className="flex items-center">
@@ -124,7 +143,7 @@ function ShoppingCart() {
                         <td className="py-4">
                           <button
                             className="border rounded-md py-2 px-4 ml-2"
-                            onClick={() => handleRemoveItem(item.id)}
+                            onClick={() => {handleRemoveItem(item.productId)}}
                           >
                             Remove
                           </button>
