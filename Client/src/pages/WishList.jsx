@@ -36,6 +36,8 @@ function WishList() {
       });
   };
   
+
+  
     if (!product) {
       return <div>Loading...</div>;
     }

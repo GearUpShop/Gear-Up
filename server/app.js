@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./Routes/authRoutes');
 const productRoutes = require('./Routes/productRoutes');
+const contactUsRoutes = require('./Routes/contactUsRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 // Routes
 app.use(authRoutes);
 app.use(productRoutes);
+app.use(contactUsRoutes);
 
 // Start the server
 const PORT = 5002;
