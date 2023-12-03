@@ -12,10 +12,6 @@ function Home() {
     <Herosection/>
     <Categories/>
     <FeaturedProducts/>
-    <Dashbord/>
-    
-    
-    
     </>
   )
 }

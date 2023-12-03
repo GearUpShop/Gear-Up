@@ -1,92 +1,114 @@
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 function ShoppingCart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [itemQuantities, setItemQuantities] = useState({});
-  const [flag , setFlag] = useState(false)
+  // const [cartItem, setCartItems] = useState([]);
+  // const [itemQuantities, setItemQuantities] = useState({});
+  const [flag, setFlag] = useState(false);
 
-
+  const {
+    total,
+    setTotal,
+    cartItems,
+    setCartItems,
+    itemQuantities,
+    setItemQuantities,
+  } = useCart();
 
   useEffect(() => {
     console.log(flag);
     fetchData();
     console.log(flag);
-  }, [flag]); 
-  
+  }, [flag]);
+
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5002/Car');
+      const response = await axios.get("http://localhost:5002/Car");
       const defaultQuantities = {};
       response.data.forEach((item) => {
         defaultQuantities[item.id] = 1;
       });
       setItemQuantities(defaultQuantities);
+      console.log(defaultQuantities);
       setCartItems(response.data);
+      console.log(cartItems);
       console.log("Cart ", response);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
-  
   const calculateSubtotal = () => {
-    return cartItems.reduce((total, item) => total + parseFloat(item.price) * itemQuantities[item.id], 0).toFixed(2);
+    const totall = cartItems
+      .reduce(
+        (total, item) =>
+          total + parseFloat(item.price) * itemQuantities[item.id],
+        0
+      )
+      .toFixed(2);
+      console.log(totall);
+
+    return totall;
   };
 
   const calculateTotal = () => {
     const subtotal = parseFloat(calculateSubtotal());
+    setTotal(subtotal)
+    console.log(subtotal);
     return subtotal.toFixed(2);
   };
 
   const handleQuantityChange = (itemId, type) => {
     setItemQuantities((prevQuantities) => {
       const updatedQuantities = { ...prevQuantities };
-      if (type === 'increase') {
+      if (type === "increase") {
         updatedQuantities[itemId] += 1;
-      } else if (type === 'decrease' && updatedQuantities[itemId] > -1) {
+      } else if (type === "decrease" && updatedQuantities[itemId] > -1) {
         updatedQuantities[itemId] -= 1;
       }
       return updatedQuantities;
     });
   };
-  axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
+  axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+    "Token"
+  )}`;
 
   const handleRemoveItem = async (productId) => {
-  try {
-    console.log(productId);
-    // Make an Axios delete request to remove the item with itemId
-    await axios.delete(`http://localhost:5002/cart/${productId}`);
-    setCartItems([]);
-    // setItemQuantities({}); 
-    setFlag(!flag);
-  
-    // Update the state to reflect the removed item
-    setCartItems((prevCartItems) => {
-      const updatedCartItems = [...prevCartItems];
-      const indexToRemove = updatedCartItems.findIndex((item) => item.id === productId);
-      if (indexToRemove !== 1) {
-        updatedCartItems.splice(indexToRemove, 1);
-      }
-      console.log(updatedCartItems);
-      return updatedCartItems;
-    });
+    try {
+      console.log(productId);
+      // Make an Axios delete request to remove the item with itemId
+      await axios.delete(`http://localhost:5002/cart/${productId}`);
+      setCartItems([]);
+      // setItemQuantities({});
+      setFlag(!flag);
 
-    setItemQuantities((prevQuantities) => {
-      const updatedQuantities = { ...prevQuantities };
-      delete updatedQuantities[productId];
-      return updatedQuantities;
-    });
+      // Update the state to reflect the removed item
+      setCartItems((prevCartItems) => {
+        const updatedCartItems = [...prevCartItems];
+        const indexToRemove = updatedCartItems.findIndex(
+          (item) => item.id === productId
+        );
+        if (indexToRemove !== 1) {
+          updatedCartItems.splice(indexToRemove, 1);
+        }
+        console.log(updatedCartItems);
+        return updatedCartItems;
+      });
 
-    console.log(flag);
-    console.log(`Item with ID ${productId} removed successfully`);
-  } catch (error) {
-    console.error('Error removing item:', error);
-  }
-};
+      setItemQuantities((prevQuantities) => {
+        const updatedQuantities = { ...prevQuantities };
+        delete updatedQuantities[productId];
+        return updatedQuantities;
+      });
 
+      console.log(flag);
+      console.log(`Item with ID ${productId} removed successfully`);
+    } catch (error) {
+      console.error("Error removing item:", error);
+    }
+  };
 
   return (
     <div>
@@ -124,26 +146,37 @@ function ShoppingCart() {
                           <div className="flex items-center">
                             <button
                               className="border rounded-md py-2 px-4 mr-2"
-                              onClick={() => handleQuantityChange(item.id, 'decrease')}
+                              onClick={() =>
+                                handleQuantityChange(item.id, "decrease")
+                              }
                             >
                               -
                             </button>
-                            <span className="text-center w-8">{itemQuantities[item.id]}</span>
+                            <span className="text-center w-8">
+                              {itemQuantities[item.id]}
+                            </span>
                             <button
                               className="border rounded-md py-2 px-4 ml-2"
-                              onClick={() => handleQuantityChange(item.id, 'increase')}
+                              onClick={() =>
+                                handleQuantityChange(item.id, "increase")
+                              }
                             >
                               +
                             </button>
                           </div>
                         </td>
                         <td className="py-4">
-                          ${(parseFloat(item.price) * itemQuantities[item.id]).toFixed(2)}
+                          $
+                          {(
+                            parseFloat(item.price) * itemQuantities[item.id]
+                          ).toFixed(2)}
                         </td>
                         <td className="py-4">
                           <button
                             className="border rounded-md py-2 px-4 ml-2"
-                            onClick={() => {handleRemoveItem(item.productId)}}
+                            onClick={() => {
+                              handleRemoveItem(item.productId);
+                            }}
                           >
                             Remove
                           </button>
@@ -167,7 +200,7 @@ function ShoppingCart() {
                   <span className="font-semibold">Total</span>
                   <span className="font-semibold">${calculateTotal()}</span>
                 </div>
-                <Link to='/payment'>
+                <Link to="/payment">
                   <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
                     Checkout
                   </button>
@@ -182,5 +215,3 @@ function ShoppingCart() {
 }
 
 export default ShoppingCart;
-
-

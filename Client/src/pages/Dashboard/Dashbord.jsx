@@ -1,18 +1,23 @@
-import React from 'react'
-import Sidebar from '../../componete/Dashboard/Sidebar'
+import Sidebar from '../../componete/Dashboard/Sidebar';
+import UsersTable from '../../componete/Dashboard/UsersTable';
+import ProductTable from '../../componete/Dashboard/ProductTable';
+import { Routes, Route } from 'react-router-dom';
 
-function Dashbord() {
+function Dashboard() {
   return (
-    <div>
+    <div >
+     
+      <Sidebar />
+      <Routes>
+       
+          {/* Child routes */}
+          <Route path="/usertable" element={<UsersTable />} />
+          <Route path="/producttable" element={<ProductTable />} />
         
-        <Sidebar/>
-        
+      </Routes>
     
-
-    
-
     </div>
-  )
+  );
 }
 
-export default Dashbord
+export default Dashboard;

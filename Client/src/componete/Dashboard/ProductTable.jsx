@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AddProduct from './AddProduct';
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ function ProductTable() {
 
   const fetchData = async () => {                                                                                                                                     
     try {
-      const response = await axios.get('http://localhost:8000/Products');
+      const response = await axios.get('http://localhost:5002/getProductsWithImage');
       setProducts(response.data);
     } catch (error) {
       console.error('حدث خطأ في جلب البيانات:', error);
@@ -19,7 +20,7 @@ function ProductTable() {
 
   const handleSave = async (productId) => {
     try {
-      await axios.put(`http://localhost:8000/Products/${productId}`, /* بيانات التحديث */);
+      await axios.put(`http://localhost:5002/getProductsWithImage/${productId}`, /* بيانات التحديث */);
       fetchData();
     } catch (error) {
       console.error('حدث خطأ في عملية الحفظ:', error);
@@ -28,7 +29,7 @@ function ProductTable() {
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:8000/Products/${productId}`);
+      await axios.delete(`http://localhost:5002/getProductsWithImage/${productId}`);
       fetchData();
     } catch (error) {
       console.error('حدث خطأ في عملية الحذف:', error);
@@ -36,11 +37,12 @@ function ProductTable() {
   };
 
   return (
-    <div className="text-gray-900 bg-gray-200">
-      <div className="p-4 flex">
+    <div>
+    <div className="text-gray-900 bg-gray-200   max-w-5xl">
+      <div className="p-4 flex ">
         <h1 className="text-3xl">Products</h1>
       </div>
-      <div className="px-3 py-4 flex justify-center">
+      <div className="px-3 py-4 flex justify-center  ">
         <table className="w-full text-md bg-white shadow-md rounded mb-4">
           <tbody>
             <tr className="border-b">
@@ -102,7 +104,10 @@ function ProductTable() {
           </tbody>
         </table>
       </div>
+      </div>
+      <AddProduct/>
     </div>
+     
   );
 }
 

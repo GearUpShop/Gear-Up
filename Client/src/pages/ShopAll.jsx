@@ -24,7 +24,7 @@ function ShopAll() {
   return (
     <div>
       <div className="text-center p-10">
-        <h1 className="font-bold text-4xl mb-4">Responsive Product card grid</h1>
+        <h1 className="font-bold text-4xl mb-4">All products needed for your car</h1>
         <h1 className="text-3xl">Tailwind CSS</h1>
       </div>
 

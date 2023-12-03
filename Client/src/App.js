@@ -24,8 +24,6 @@ import Footer from './componete/Footer';
 import Profile from './pages/Profile';
 import Dashbord from './pages/Dashboard/Dashbord';
 import { AuthProvider } from './componete/AuthContext'; // استيراد AuthProvider
-import UsersTable from './componete/Dashboard/UsersTable';
-import ProductTable from './componete/Dashboard/ProductTable';
 import WishList from './pages/WishList';
 
 function App() {
@@ -53,9 +51,8 @@ function App() {
           <Route path='/accessories' element={<Accessories />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/wishlist' element={<WishList />} />
-          <Route path='/dashboard' element={<Dashbord />} />
-          <Route path='/usertable' element={<UsersTable />} />
-          <Route path='/producttable' element={<ProductTable />} />
+          <Route path='/dashboard/*' element={<Dashbord />} />
+        
           
         </Routes>
         <Footer />

@@ -12,7 +12,7 @@ function WishList() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get('http://localhost:5002/wish');
+        const response = await axios.get('http://localhost:5002/wish  ');
         console.log('Fetched product:', response.data);
         setProduct(response.data);
       } catch (error) {
