@@ -34,7 +34,7 @@ Our E-commerce web application, crafted with React for the frontend, Node.js for
 
 - **Rafat Maita**
 - [LinkedIn](https://www.linkedin.com/in/rafat-maita/)
-  [rafatmaita](http://rafatmaita2020@gmail.com)
+-  [rafatmaita](http://rafatmaita2020@gmail.com)
 
 ## Project Structure
 
@@ -44,6 +44,6 @@ Our E-commerce web application, crafted with React for the frontend, Node.js for
 ## Additional Resources
 
 - **[Organization Repo](https://github.com/GearUpShop/Gear-Up.git):** Explore the full version of our website
-<!-- - **[Project Brief](https://docs.google.com/document/d/1t24om4bHZDi1XQWPe0UmDAZqClagMfYwTcAaNRYW3Lw/edit):** Explore an overview of the project
-- **[Project Documentation](https://docs.google.com/document/d/1I99wycKGacMofl1z2NxPQ1Zp2kvQOg3E_s_TDO-Gfno/edit#heading=h.enjvcofoqo5k):** Explore detailed documentation for the Founders Retrievers project.
+- **[Project Brief](https://docs.google.com/document/d/1mbO12G3Svpp1z_KuboeuwNX5VbcrmCFhVBeSfv3amKM/edit?usp=sharing):** Explore an overview of the project
+<!-- - **[Project Documentation](https://docs.google.com/document/d/1I99wycKGacMofl1z2NxPQ1Zp2kvQOg3E_s_TDO-Gfno/edit#heading=h.enjvcofoqo5k):** Explore detailed documentation for the Founders Retrievers project.
 - **[Project Figma](https://www.figma.com/file/dmEdccUWNsdUszUY0XAdZd/Lost-and-Found?type=design&node-id=0-1&mode=design&t=xN1S5J80Iv3R9Fbo-0):** Explore the mockup and wireframe of the website -->
