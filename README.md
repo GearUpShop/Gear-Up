@@ -45,5 +45,5 @@ Our E-commerce web application, crafted with React for the frontend, Node.js for
 
 - **[Organization Repo](https://github.com/GearUpShop/Gear-Up.git):** Explore the full version of our website
 - **[Project Brief](https://docs.google.com/document/d/1mbO12G3Svpp1z_KuboeuwNX5VbcrmCFhVBeSfv3amKM/edit?usp=sharing):** Explore an overview of the project
-<!-- - **[Project Documentation](https://docs.google.com/document/d/1I99wycKGacMofl1z2NxPQ1Zp2kvQOg3E_s_TDO-Gfno/edit#heading=h.enjvcofoqo5k):** Explore detailed documentation for the Founders Retrievers project.
-- **[Project Figma](https://www.figma.com/file/dmEdccUWNsdUszUY0XAdZd/Lost-and-Found?type=design&node-id=0-1&mode=design&t=xN1S5J80Iv3R9Fbo-0):** Explore the mockup and wireframe of the website -->
+- **[Project Documentation](https://docs.google.com/document/d/1yOCMGqAuAv3wTXj25wnsiMUCyrA5ye7Si7A2wjW2Y08/edit?usp=sharing):** Explore detailed documentation for the Founders Retrievers project.
+<!-- - **[Project Figma](https://www.figma.com/file/dmEdccUWNsdUszUY0XAdZd/Lost-and-Found?type=design&node-id=0-1&mode=design&t=xN1S5J80Iv3R9Fbo-0):** Explore the mockup and wireframe of the website -->
