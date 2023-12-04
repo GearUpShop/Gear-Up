@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 function UsersTable() {
   const [users, setUsers] = useState([]);
 
@@ -93,6 +94,7 @@ function UsersTable() {
           </tbody>
         </table>
       </div>
+     
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 function NavBar({isLoggedIn, setIsLoggedIn }) {
   
-  const [searchQuery, setSearchQuery] = useState('');
+  
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const navigate = useNavigate();
 
@@ -16,15 +16,9 @@ function NavBar({isLoggedIn, setIsLoggedIn }) {
       }
   })
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log('Searching for:', searchQuery);
-    // You can add more operations here, such as redirecting the user to the search page
-  };
+
+
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -106,15 +100,14 @@ function NavBar({isLoggedIn, setIsLoggedIn }) {
               </a>
 
               {/* This is an example component */}
-              <form onSubmit={handleSearchSubmit}>
+              <form >
                 <div className="pt-2 relative mx-auto text-gray-600">
                   <input
                     className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                     type="search"
                     name="search"
                     placeholder="Search"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
+                   
                   />
                   <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
                     <svg

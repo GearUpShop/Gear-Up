@@ -27,6 +27,16 @@ function ContactUs() {
         email: '',
         message: '',
       });
+       // Display an alert
+       <div className="text-xl font-normal  max-w-full flex-initial">
+       <div className="py-2">
+         This is a success messsage
+         <div className="text-sm font-base">
+           More information about the message can be found{" "}
+           <a href="/#">here</a>
+         </div>
+       </div>
+     </div>
     } catch (error) {
       // Handle errors
       console.error('Error submitting form:', error);
