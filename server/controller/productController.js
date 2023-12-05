@@ -507,3 +507,24 @@ exports.getProductDetails = async (req, res) => {
           }
         };
         
+
+exports.softDeleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.productId; 
+
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    product.isDeleted = true;
+
+    const updatedProduct = await product.save();
+
+    res.json({ message: 'Product soft deleted successfully', product: updatedProduct });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
