@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,7 @@ function Seafety() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/Seafety');
+        const response = await axios.get(' http://localhost:5002/category/security');
         console.log('Fetched data:', response.data);
         setProducts(response.data);
       } catch (error) {
@@ -34,16 +33,16 @@ function Seafety() {
         className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
       >
         {products.map((product) => (
-          <div key={product.id} className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+          <div key={product._id} className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             {/* Use Link component to navigate to product details page */}
-            <Link to={`/products/${product.id}`}>
+            <Link to={`/products/${product._id}`}>
               <img
-                src={product.image}
+                src={product.imageUrl}
                 alt={product.name}
                 className="h-80 w-72 object-cover rounded-t-xl"
               />
               <div className="px-4 py-3 w-72">
-                <span className="text-gray-400 mr-3 uppercase text-xs">{product.type}</span>
+                <span className="text-gray-400 mr-3 uppercase text-xs">{product.category}</span>
                 <p className="text-lg font-bold text-black truncate block capitalize">
                   {product.name}
                 </p>
@@ -112,22 +111,3 @@ function Seafety() {
 }
 
 export default Seafety;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

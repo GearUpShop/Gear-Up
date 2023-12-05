@@ -51,6 +51,8 @@ function App() {
           <Route path='/accessories' element={<Accessories />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/wishlist' element={<WishList />} />
+
+          
           <Route path='/dashboard/*' element={<Dashbord />} />
         
           

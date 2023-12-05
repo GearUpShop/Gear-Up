@@ -68,15 +68,15 @@ function CheckoutForm({ stripe, elements }) {
     }
   };
   return (
-    <div>
-      <div class="product-info">
+    <div className="border-b border-gray-900/30 pb-12 max-w-md bg-blue-200/30 ">
+      <div className="border-b border-gray-900/30 pb-12">
         {/* <h3>{cartItems}</h3> */}
 
         <h2>{total}$</h2>
-        <h3 className="product-title">Apple MacBook Pro</h3>
-        <h4 className="product-price">mm</h4>
+        
+        <h4 className="product-price">All products</h4>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <CardSection />
         <button className="btn-pay">Buy Now</button>
       </form>

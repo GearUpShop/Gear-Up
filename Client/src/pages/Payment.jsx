@@ -9,11 +9,11 @@ const Payment = () => {
   const { total } = useCart();
   return (
     <div className="product">
-    <img
+    {/* <img
       src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress"
       alt="laptop"
       style={{ width: "100%", height: "auto" }}
-    />
+    /> */}
     <div>
 
 
