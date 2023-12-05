@@ -4,11 +4,11 @@ import axios from 'axios';
 function AddProduct() {
   const [productData, setProductData] = useState({
     name: '',
-        imageUrl: '',
-        price: '',
-        title: '',
-        description:'',
-        category: '', // إعادة تعيين حقل الصنف
+    title: '',
+    description: '',
+    price: '',
+    category: '',// إعادة تعيين حقل الصنف
+    imageUrl: '', // إعادة تعيين حقل الصنف
   });
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ function AddProduct() {
 
     try {
       // إجراء طلب POST إلى النقطة النهائية
-      const response = await axios.post('http://localhost:5002/getProductsWithImage/', productData);
+      const response = await axios.post('http://localhost:5002/add', productData);
 
       // معالجة الاستجابة، على سبيل المثال، إظهار رسالة نجاح
       console.log('Product added successfully:', response.data);
@@ -32,11 +32,11 @@ function AddProduct() {
       // تفريغ النموذج بعد التقديم الناجح
       setProductData({
         name: '',
-        imageUrl: '',
-        price: '',
         title: '',
-        description:'',
-        category: '', // إعادة تعيين حقل الصنف
+        description: '',
+        price: '',
+        category: '',// إعادة تعيين حقل الصنف
+        imageUrl: '',
       });
     } catch (error) {
       // التعامل مع الأخطاء، على سبيل المثال، إظهار رسالة خطأ
