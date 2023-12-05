@@ -178,6 +178,7 @@ exports.getProductsWithImage = async (req, res) => {
                     title: 1,
                     rating: 1,
                     price: 1,
+                    category: 1,
                     'image.imageUrl': 1
                 }
             }
