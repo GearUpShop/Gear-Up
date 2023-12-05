@@ -28,7 +28,7 @@ function ProductTable() {
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5002/getProductsWithImage/${productId}`);
+      await axios.delete(`http://localhost:5002/delete/${productId}`);
       fetchData();
     } catch (error) {
       console.error('حدث خطأ في عملية الحذف:', error);
@@ -52,7 +52,7 @@ function ProductTable() {
             </tr>
             {Array.isArray(products) && products.length > 0 ? (
               products.map((product) => (
-                <tr key={product.id} className="border-b hover:bg-orange-100 bg-gray-100">
+                <tr key={product._id} className="border-b hover:bg-orange-100 bg-gray-100">
                   <td className="p-3 px-5">
                     <input
                       type="text"
@@ -80,14 +80,14 @@ function ProductTable() {
                   <td className="p-3 px-5 flex justify-end">
                     <button
                       type="button"
-                      onClick={() => handleSave(product.id)}
+                      onClick={() => handleSave(product._id)}
                       className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Save
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleDelete(product._id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete
