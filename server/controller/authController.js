@@ -85,10 +85,10 @@ exports.login = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-      const users = await User.find();
+      const users = await User.find({ isDeleted: false });
   
       if (!users || users.length === 0) {
-        return res.status(404).json({ message: 'No users found' });
+        return res.status(404).json({ message: 'No active users found' });
       }
   
       res.json({ users });
@@ -96,4 +96,30 @@ exports.getAllUsers = async (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
+};
+
+
+  exports.softDeleteUser = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+  
+      // Find the user by ID
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Soft delete the user by updating isDeleted to true
+      user.isDeleted = true;
+  
+      // Save the updated user
+      const updatedUser = await user.save();
+  
+      res.json({ message: 'User soft deleted successfully', user: updatedUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   };
+  
