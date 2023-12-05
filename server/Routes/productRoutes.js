@@ -22,5 +22,6 @@ router.delete('/cart/:productId',authorization.authorize ,productController.dele
 router.get('/wish',authorization.authorize, productController.getwishlistProducts);
 router.get('/category/:category', productController.getProductsByCategory);
 router.post('/add', productController.addNewProduct);
+router.delete('/delete/:productId', productController.softDeleteProduct);
 
 module.exports = router;
