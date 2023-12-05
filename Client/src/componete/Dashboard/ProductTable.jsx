@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddProduct from './AddProduct';
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
@@ -73,7 +72,7 @@ function ProductTable() {
                   <td className="p-3 px-5">
                     <input
                       type="text"
-                      value={product.type}
+                      value={product.category}
                       className="bg-transparent"
                       readOnly
                     />
