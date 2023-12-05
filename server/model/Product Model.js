@@ -10,6 +10,7 @@ const productSchema = new Schema({
     category: { type: String, enum: ['tools', 'cleaning', 'security', 'accessories', 'mobile', 'lights'], required: true },
     isDeleted: { type: Boolean, default: false },
     isTopSelling: { type: Boolean, default: false },
+    
 });
 
 const Product = mongoose.model('Product', productSchema);

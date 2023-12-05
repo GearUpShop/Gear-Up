@@ -447,26 +447,21 @@ exports.getProductDetails = async (req, res) => {
           try {
             const category = req.params.category;
         
-            // Fetch products with the specified category and isDeleted = false
             const products = await Product.find({ category, isDeleted: false });
         
             if (!products || products.length === 0) {
               return res.status(404).json({ message: 'No products found for the given category' });
             }
         
-            // Extract product IDs for fetching image URLs
             const productIds = products.map(product => product._id);
         
-            // Fetch image URLs associated with the products
             const images = await Image.find({ productId: { $in: productIds } });
         
-            // Create a map to easily associate product IDs with their respective image URLs
             const imageMap = {};
             images.forEach(image => {
               imageMap[image.productId.toString()] = image.imageUrl;
             });
         
-            // Add imageUrl to the product details
             const productsWithImages = products.map(product => ({
               ...product.toObject(),
               imageUrl: imageMap[product._id.toString()],
@@ -478,3 +473,37 @@ exports.getProductDetails = async (req, res) => {
             res.status(500).json({ message: 'Internal Server Error' });
           }
         };
+        
+        exports.addNewProduct = async (req, res) => {
+          try {
+            const { name, title, description, price, rating, category, imageUrl } = req.body;
+        
+            if (!name || !title || !description || !price || !category || !imageUrl) {
+              return res.status(400).json({ message: 'Name, title, description, price, category, and imageUrl are required' });
+            }
+        
+            const newProduct = new Product({
+              name,
+              title,
+              description,
+              price,
+              rating: rating || 0,
+              category,
+            });
+        
+            const savedProduct = await newProduct.save();
+        
+            const newImage = new Image({
+              imageUrl,
+              productId: savedProduct._id,
+            });
+        
+            await newImage.save();
+        
+            res.json({ message: 'New product added successfully', product: savedProduct });
+          } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+          }
+        };
+        
