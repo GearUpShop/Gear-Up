@@ -5,9 +5,7 @@ import axios from 'axios';
 function UsersTable() {
   const [user, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -30,13 +28,18 @@ function UsersTable() {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8000/Users/${userId}`);
+      await axios.put(`http://localhost:5002/user/${userId}`);
+      setUsers([])
       fetchData();
+      console.log(user);
     } catch (error) {
       console.error('حدث خطأ في عملية الحذف:', error);
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [user]);
   return (
     <div className="text-gray-900 bg-gray-200 overflow-hidden">
       <div className="p-4 flex">
@@ -88,7 +91,7 @@ function UsersTable() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(users.id)}
+                      onClick={() => handleDelete(users._id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete
