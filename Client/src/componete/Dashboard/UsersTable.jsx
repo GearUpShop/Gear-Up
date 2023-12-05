@@ -5,9 +5,7 @@ import axios from 'axios';
 function UsersTable() {
   const [user, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -30,13 +28,18 @@ function UsersTable() {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8000/Users/${userId}`);
+      await axios.put(`http://localhost:5002/user/${userId}`);
+      setUsers([])
       fetchData();
+      console.log(user);
     } catch (error) {
       console.error('حدث خطأ في عملية الحذف:', error);
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [user]);
   return (
     <div className="text-gray-900 bg-gray-200 overflow-hidden">
       <div className="p-4 flex">
@@ -48,6 +51,7 @@ function UsersTable() {
             <tr className="border-b">
               <th className="text-left p-3 px-5">Name</th>
               <th className="text-left p-3 px-5">Email</th>
+              <th className="text-left p-3 px-5">Role</th>
               <th />
             </tr>
             {Array.isArray(user) && user.length > 0 ? (
@@ -69,6 +73,14 @@ function UsersTable() {
                       readOnly
                     />
                   </td>
+                  <td className="p-3 px-5">
+                    <input
+                      type="text"
+                      value={users.role}
+                      className="bg-transparent"
+                      readOnly
+                    />
+                  </td>
                   <td className="p-3 px-5 flex justify-end">
                     <button
                       type="button"
@@ -79,7 +91,7 @@ function UsersTable() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(users.id)}
+                      onClick={() => handleDelete(users._id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete
