@@ -48,6 +48,7 @@ function UsersTable() {
             <tr className="border-b">
               <th className="text-left p-3 px-5">Name</th>
               <th className="text-left p-3 px-5">Email</th>
+              <th className="text-left p-3 px-5">Role</th>
               <th />
             </tr>
             {Array.isArray(user) && user.length > 0 ? (
@@ -65,6 +66,14 @@ function UsersTable() {
                     <input
                       type="text"
                       value={users.email}
+                      className="bg-transparent"
+                      readOnly
+                    />
+                  </td>
+                  <td className="p-3 px-5">
+                    <input
+                      type="text"
+                      value={users.role}
                       className="bg-transparent"
                       readOnly
                     />
