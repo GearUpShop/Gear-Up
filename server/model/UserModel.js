@@ -7,6 +7,8 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     profileImage: { type: String },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    isDeleted: { type: Boolean, default: false, required: true  },
+
 });
 
 const User = mongoose.model('User', userSchema);
