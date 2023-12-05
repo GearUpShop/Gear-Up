@@ -474,4 +474,36 @@ exports.getProductDetails = async (req, res) => {
           }
         };
         
+        exports.addNewProduct = async (req, res) => {
+          try {
+            const { name, title, description, price, rating, category, imageUrl } = req.body;
+        
+            if (!name || !title || !description || !price || !category || !imageUrl) {
+              return res.status(400).json({ message: 'Name, title, description, price, category, and imageUrl are required' });
+            }
+        
+            const newProduct = new Product({
+              name,
+              title,
+              description,
+              price,
+              rating: rating || 0,
+              category,
+            });
+        
+            const savedProduct = await newProduct.save();
+        
+            const newImage = new Image({
+              imageUrl,
+              productId: savedProduct._id,
+            });
+        
+            await newImage.save();
+        
+            res.json({ message: 'New product added successfully', product: savedProduct });
+          } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+          }
+        };
         
