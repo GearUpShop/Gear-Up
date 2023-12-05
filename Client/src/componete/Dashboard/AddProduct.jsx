@@ -3,10 +3,12 @@ import axios from 'axios';
 
 function AddProduct() {
   const [productData, setProductData] = useState({
-    productName: '',
-    image: '',
-    price: '',
-    description: '',
+    name: '',
+        imageUrl: '',
+        price: '',
+        title: '',
+        description:'',
+        category: '', // إعادة تعيين حقل الصنف
   });
 
   const handleChange = (e) => {
@@ -21,21 +23,23 @@ function AddProduct() {
     e.preventDefault();
 
     try {
-      // Make a POST request to your endpoint
-      const response = await axios.post('YOUR_API_ENDPOINT', productData);
+      // إجراء طلب POST إلى النقطة النهائية
+      const response = await axios.post('http://localhost:5002/getProductsWithImage/', productData);
 
-      // Handle the response, e.g., show a success message
+      // معالجة الاستجابة، على سبيل المثال، إظهار رسالة نجاح
       console.log('Product added successfully:', response.data);
 
-      // Clear the form after successful submission
+      // تفريغ النموذج بعد التقديم الناجح
       setProductData({
-        productName: '',
-        image: '',
+        name: '',
+        imageUrl: '',
         price: '',
-        description: '',
+        title: '',
+        description:'',
+        category: '', // إعادة تعيين حقل الصنف
       });
     } catch (error) {
-      // Handle errors, e.g., show an error message
+      // التعامل مع الأخطاء، على سبيل المثال، إظهار رسالة خطأ
       console.error('Error adding product:', error);
     }
   };
@@ -57,8 +61,8 @@ function AddProduct() {
             <input
               type="text"
               id="name"
-              name="productName"
-              value={productData.productName}
+              name="name"
+              value={productData.name}
               onChange={handleChange}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required=""
@@ -75,8 +79,8 @@ function AddProduct() {
             <input
               type="text"
               id="image"
-              name="image"
-              value={productData.image}
+              name="imageUrl"
+              value={productData.imageUrl}
               onChange={handleChange}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="Image URL"
@@ -115,6 +119,49 @@ function AddProduct() {
               onChange={handleChange}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             />
+          </div>
+
+          <div className="mb-6">
+            <label
+              htmlFor="description"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              title
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={productData.title}
+              onChange={handleChange}
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label
+              htmlFor="category"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              value={productData.category}
+              onChange={handleChange}
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            >
+              <option value="" disabled>
+                Select
+              </option>
+              <option value="cleaning">Clean</option>
+              <option value="tools">Tools</option>
+              <option value="lights">Light</option>
+              <option value="mobile">Mobile</option>
+              <option value="security">Seafty</option>
+              <option value="accessories">Accessorize</option>
+            </select>
           </div>
 
           <button

@@ -11,7 +11,7 @@ function UsersTable() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/Users');
+      const response = await axios.get('http://localhost:5002/signup');
       setUsers(response.data);
     } catch (error) {
       console.error('حدث خطأ في جلب البيانات:', error);
@@ -37,12 +37,12 @@ function UsersTable() {
   };
 
   return (
-    <div className="text-gray-900 bg-gray-200">
+    <div className="text-gray-900 bg-gray-200 overflow-hidden">
       <div className="p-4 flex">
         <h1 className="text-3xl">Users</h1>
       </div>
-      <div className="px-3 py-4 flex justify-center">
-        <table className="w-full text-md bg-white shadow-md rounded mb-4">
+      <div className="px-3 py-4 flex justify-center overflow-hidden">
+        <table className="w-full text-md bg-white shadow-md rounded mb-4 overflow-hidden">
           <tbody>
             <tr className="border-b">
               <th className="text-left p-3 px-5">Name</th>

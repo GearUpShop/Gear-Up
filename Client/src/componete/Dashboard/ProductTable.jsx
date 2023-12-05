@@ -38,12 +38,12 @@ function ProductTable() {
 
   return (
     <div>
-    <div className="text-gray-900 bg-gray-200   max-w-5xl">
+    <div className="text-gray-900 bg-blue-200   overflow-hidden">
       <div className="p-4 flex ">
         <h1 className="text-3xl">Products</h1>
       </div>
-      <div className="px-3 py-4 flex justify-center  ">
-        <table className="w-full text-md bg-white shadow-md rounded mb-4">
+      <div className="px-3 py-4 flex justify-center overflow-hidden">
+        <table className=" w-full text-md bg-white shadow-md rounded mb-4 overflow-hidden">
           <tbody>
             <tr className="border-b">
               <th className="text-left p-3 px-5">Product Name</th>
@@ -105,7 +105,7 @@ function ProductTable() {
         </table>
       </div>
       </div>
-      <AddProduct/>
+     
     </div>
      
   );
