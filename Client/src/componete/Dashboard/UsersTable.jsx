@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 function UsersTable() {
-  const [users, setUsers] = useState([]);
+  const [user, setUsers] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -11,8 +11,9 @@ function UsersTable() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5002/signup');
-      setUsers(response.data);
+      const response = await axios.get('http://localhost:5002/users');
+      setUsers(response.data.users);
+      
     } catch (error) {
       console.error('حدث خطأ في جلب البيانات:', error);
     }
@@ -49,13 +50,13 @@ function UsersTable() {
               <th className="text-left p-3 px-5">Email</th>
               <th />
             </tr>
-            {Array.isArray(users) && users.length > 0 ? (
-              users.map((user) => (
-                <tr key={user.id} className="border-b hover:bg-orange-100 bg-gray-100">
+            {Array.isArray(user) && user.length > 0 ? (
+              user.map((users) => (
+                <tr key={users.id} className="border-b hover:bg-orange-100 bg-gray-100">
                   <td className="p-3 px-5">
                     <input
                       type="text"
-                      value={user.name}
+                      value={users.username}
                       className="bg-transparent"
                       readOnly
                     />
@@ -63,7 +64,7 @@ function UsersTable() {
                   <td className="p-3 px-5">
                     <input
                       type="text"
-                      value={user.email}
+                      value={users.email}
                       className="bg-transparent"
                       readOnly
                     />
@@ -71,14 +72,14 @@ function UsersTable() {
                   <td className="p-3 px-5 flex justify-end">
                     <button
                       type="button"
-                      onClick={() => handleSave(user.id)}
+                      onClick={() => handleSave(users.id)}
                       className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Save
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(users.id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete
