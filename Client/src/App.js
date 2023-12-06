@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route ,Navigate} from 'react-router-dom';
 import './App.css';
 import NavBar from './componete/NavBar';
 import Home from './pages/Home';
@@ -27,13 +27,15 @@ import { AuthProvider } from './componete/AuthContext'; // استيراد AuthPr
 import WishList from './pages/WishList';
 
 function App() {
+  const role = sessionStorage.getItem('role');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
+
     <AuthProvider>
       <BrowserRouter>
         <NavBar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={(role==1)?(<Home />):(<Navigate to='/login' />) } />
           <Route path='/shopall' element={<ShopAll />} />
           <Route path='/contactus' element={<ContactUs />} />
           <Route path='/about' element={<AboutUs />} />

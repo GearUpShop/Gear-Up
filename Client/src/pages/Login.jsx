@@ -26,11 +26,12 @@ function Login({setIsLoggedIn}) {
 
       // Assuming the token is returned in the response
       const authToken = response.data.authToken;
-      const userId = response.data.userId;
+      const role = response.data.role;
 
       // Save the token and user_id to cookies or localStorage
       Cookies.set('Token', authToken);
-      Cookies.set('user_id', userId);
+      // Cookies.set('user_id', userId);
+      sessionStorage.setItem('role', JSON.stringify(role));
       localStorage.setItem("Token",response.data.authToken);
       setIsLoggedIn(true)
       navigate('/');
