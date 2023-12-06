@@ -58,7 +58,10 @@ function ShoppingCart() {
     setTotal(subtotal)
     console.log(subtotal);
     return subtotal.toFixed(2);
-  };
+  }
+
+  //TODO
+
 
   const handleQuantityChange = (itemId, type) => {
     setItemQuantities((prevQuantities) => {

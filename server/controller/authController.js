@@ -70,14 +70,14 @@ exports.login = async (req, res) => {
             return res.status(400).send("Invalid password");
         }
 
-        // Generate a JWT token
-        const token = jwt.sign({ _id: user._id }, "your-secret-key", { expiresIn: "10h" });
-
-        // Set the token as a cookie (optional, you can also send it in the response body)
+        const token = jwt.sign(
+            { _id: user._id, role: user.role },
+            "your-secret-key",
+            { expiresIn: "10h" }
+          );
         res.cookie("accessToken", token, { httpOnly: true });
 
-        // Send the response with user information and token
-        res.json({ userId: user._id, authToken: token });
+        res.json({  authToken: token ,role: user.role});
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
