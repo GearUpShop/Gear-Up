@@ -31,7 +31,7 @@ function Login({setIsLoggedIn}) {
       // Save the token and user_id to cookies or localStorage
       Cookies.set('Token', authToken);
       // Cookies.set('user_id', userId);
-      sessionStorage.setItem('role', JSON.stringify(role));
+      sessionStorage.setItem('role',role);
       localStorage.setItem("Token",response.data.authToken);
       setIsLoggedIn(true)
       navigate('/');

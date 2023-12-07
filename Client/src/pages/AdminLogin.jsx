@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-function Login({setIsLoggedIn}) {
+function AdminLogin({setIsLoggedIn}) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -22,7 +22,7 @@ function Login({setIsLoggedIn}) {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5002/login', formData);
+      const response = await axios.post('http://localhost:5002/logins', formData);
 
       // Assuming the token is returned in the response
       const authToken = response.data.authToken;
@@ -33,7 +33,7 @@ function Login({setIsLoggedIn}) {
       Cookies.set('user_id', userId);
       localStorage.setItem("Token",response.data.authToken);
       setIsLoggedIn(true)
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error logging in', error);
       alert('Password or Email wrong');
@@ -154,4 +154,4 @@ function Login({setIsLoggedIn}) {
   );
 }
 
-export default Login;
+export default AdminLogin;

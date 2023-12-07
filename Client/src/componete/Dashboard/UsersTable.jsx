@@ -41,7 +41,7 @@ function UsersTable() {
     fetchData();
   }, [user]);
   return (
-    <div className="text-gray-900 bg-gray-200 overflow-hidden">
+    <div className="text-gray-900 bg-blue-200 overflow-hidden">
       <div className="p-4 flex">
         <h1 className="text-3xl">Users</h1>
       </div>

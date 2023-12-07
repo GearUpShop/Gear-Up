@@ -3,9 +3,9 @@ import axios from 'axios';
 
 function Profile() {
   const [profile, setProfile] = useState({
-    fullname: 'Bashar Aysar',
-    email: 'example@example.com',
-    profileImage: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+    fullname: '',
+    email: '',
+    profileImage: '',
   });
   const [wishlist, setWishlist] = useState([]);
   const [isEditFormVisible, setEditFormVisibility] = useState(false);
@@ -21,6 +21,14 @@ function Profile() {
     if (savedWishlist) {
       setWishlist(savedWishlist);
     }
+
+    axios.get('http://your-api-endpoint')  // Replace 'http://your-api-endpoint' with your actual API endpoint
+      .then((response) => {
+        console.log('Data from additional endpoint:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data from additional endpoint:', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -62,16 +70,6 @@ function Profile() {
         alert('Error updating profile:', error);
       });
   };
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/favorite')
-      .then((response) => {
-        setWishlist(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching wishlist data:', error);
-      });
-  }, []);
 
   const handleRemoveFromWishlist = (itemId) => {
     const updatedWishlist = wishlist.filter(item => item.id !== itemId);
@@ -153,7 +151,6 @@ function Profile() {
                           <p className="mt-1 text-sm text-slate-400">{item.subdescription}</p>
                           <div className="mt-3 flex items-end justify-between">
                             <p className="text-lg font-bold text-orange-500">{item.price}</p>
-                            {/* Add to cart button */}
                             <div
                               className="flex items-center space-x-1.5 rounded-lg bg-orange-500 px-4 py-1.5 text-white duration-100 hover-bg-orange-600"
                             >
@@ -235,37 +232,3 @@ function EditProfileForm({ profile, onSave, onCancel, onImageChange }) {
 }
 
 export default Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

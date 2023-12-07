@@ -4,6 +4,7 @@ import ProductTable from '../../componete/Dashboard/ProductTable';
 import { Routes, Route } from 'react-router-dom';
 import AddProduct from '../../componete/Dashboard/AddProduct';
 import AdminProfile from '../../componete/Dashboard/AdminProfile';
+import ShoingStats from '../../componete/Dashboard/ShoingStats';
 
 function Dashboard() {
   return (
@@ -19,6 +20,7 @@ function Dashboard() {
           <Route path="/producttable" element={<ProductTable />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/adminProfile" element={<AdminProfile />} />
+          <Route path="/shoingStats" element={<ShoingStats />} />
          
         
       </Routes>

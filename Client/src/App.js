@@ -1,7 +1,5 @@
-
-import React from 'react';
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route ,Navigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import NavBar from './componete/NavBar';
 import Home from './pages/Home';
@@ -25,23 +23,27 @@ import Profile from './pages/Profile';
 import Dashbord from './pages/Dashboard/Dashbord';
 import { AuthProvider } from './componete/AuthContext'; // استيراد AuthProvider
 import WishList from './pages/WishList';
+import AdminLogin from './pages/AdminLogin';
 
 function App() {
   const role = sessionStorage.getItem('role');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  return (
 
+  return (
     <AuthProvider>
       <BrowserRouter>
-        <NavBar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
-          <Route path='/' element={(role==1)?(<Home />):(<Navigate to='/login' />) } />
+          <Route path='/' element={<Home />} />
           <Route path='/shopall' element={<ShopAll />} />
           <Route path='/contactus' element={<ContactUs />} />
           <Route path='/about' element={<AboutUs />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/shopingcart' element={<ShopingCatr />} />
-          <Route path='/login' element={<Login  setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route
+            path='/login'
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path='/products/:productId' element={<ProductDetales />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/categories' element={<Categories />} />
@@ -53,11 +55,19 @@ function App() {
           <Route path='/accessories' element={<Accessories />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/wishlist' element={<WishList />} />
+          <Route path='/adminLogin' element={<AdminLogin />} />
+         
 
-          
-          <Route path='/dashboard/*' element={<Dashbord />} />
-        
-          
+          <Route
+            path='/dashboard/*'
+            element={
+              role === 'admin' ? (
+                <Dashbord />
+              ) : (
+                <Navigate to='/' replace={true} />
+              )
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -66,5 +76,3 @@ function App() {
 }
 
 export default App;
-
-

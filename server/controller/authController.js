@@ -82,6 +82,45 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+exports.logins = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Validate input using Joi
+        const schema = Joi.object({
+            email: Joi.string().email().required(),
+            password: Joi.string().required(),
+        });
+
+        const { error } = schema.validate({ email, password });
+        if (error) {
+            return res.status(400).json({ message: "Validation error", error: error.details });
+        }
+
+        // Check if the user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        // Compare the provided password with the stored hashed password
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(400).send("Invalid password");
+        }
+
+        const token = jwt.sign(
+            { _id: user._id, role: user.role },
+            "your-secret-key",
+            { expiresIn: "10h" }
+          );
+        res.cookie("accessToken", token, { httpOnly: true });
+
+        res.json({  authToken: token ,role: user.role});
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+};
 
 exports.getAllUsers = async (req, res) => {
     try {

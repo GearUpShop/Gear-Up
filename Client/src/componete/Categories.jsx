@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 function Categories() {
   return (
     <div>
-      
+     
       <>
-      
-  {/* component */}
-  <div className="flex justify-center items-center ">
+  <div className="flex justify-center items-center bg-gray-200">
     {/*- more free and premium Tailwind CSS components at https://tailwinduikit.com/ -*/}
     <div className="2xl:mx-auto 2xl:container py-12 px-4 sm:px-6 xl:px-20 2xl:px-0 w-full  ">
       <div className="flex flex-col jusitfy-center items-center space-y-10  ">
@@ -102,20 +99,21 @@ function Categories() {
             
             <div className="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50" />
           </div>
-         
-         
-       
-         
-          
         </div>
       
       </div>
     </div>
   </div>
   
-</>
+</> 
 
     </div>
+
+
+
+
+
+
   )
 }
 

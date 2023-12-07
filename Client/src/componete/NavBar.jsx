@@ -32,7 +32,8 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     Cookies.remove("Token");
-    Cookies.remove("user_id");
+    // Cookies.remove("user_id");
+    sessionStorage.removeItem('role');
     // Redirect the user to the home page after logging out
     navigate("/");
   };
@@ -188,7 +189,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                   </Link>
                   {isLogClick && (
                     <div className="flex flex-col absolute right-28 top-16 border-2 rounded-lg border-blue-300 bg-slate-100 py-4 px-7">
-                      <Link onClick={handleLoginClick}>
+                      <Link to="/adminLogin" onClick={handleLoginClick}>
                         <span>Login Admin</span>
                       </Link>
 
