@@ -82,8 +82,10 @@ function ShoppingCart() {
     try {
       console.log(productId);
       // Make an Axios delete request to remove the item with itemId
+      setCartItems(cartItems.filter((cartItem) => cartItem.id !== productId))
+
       await axios.delete(`http://localhost:5002/cart/${productId}`);
-      setCartItems([]);
+     
       // setItemQuantities({});
       setFlag(!flag);
 

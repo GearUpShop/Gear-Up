@@ -1,25 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import DropdownsList from './DropdownsList';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isLogClick, setIsLogClick] = useState(false);
+
   const navigate = useNavigate();
+  ///////////
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get('Token');
+    const token = Cookies.get("Token");
     if (token) {
       setIsLoggedIn(true);
     }
   });
 
+  ///////////
+  const handleMouseEnter = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownOpen(false);
+  };
+  const handleLoginClick = () => {
+    setIsLogClick(!isLogClick);
+  };
+  ////////////
   const handleLogout = () => {
     setIsLoggedIn(false);
-    Cookies.remove('Token');
-    Cookies.remove('user_id');
+    Cookies.remove("Token");
+    // Cookies.remove("user_id");
+    sessionStorage.removeItem('role');
     // Redirect the user to the home page after logging out
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -28,7 +44,10 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
         <div className="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
           <div className="flex justify-between items-center">
             <div>
-              <Link to='/profile' className="text-blue-700 text-xl font-bold md:text-2xl hover:text-gray-700">
+              <Link
+                to="/profile"
+                className="text-blue-700 text-xl font-bold md:text-2xl hover:text-gray-700"
+              >
                 GEAR UP SHOP
               </Link>
             </div>
@@ -49,13 +68,36 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
           </div>
           <div className="md:flex items-center">
             <div className="flex flex-col md:flex-row md:mx-6">
-              <Link to='/' className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">HOME</Link>
-              <Link to='/shopall' className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Shop</Link>
-              <Link to='/contactus' className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Contact</Link>
-              <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to='/about'>About</Link>
+              <Link
+                to="/"
+                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+              >
+                HOME
+              </Link>
+              <Link
+                to="/shopall"
+                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+              >
+                Shop
+              </Link>
+              <Link
+                to="/contactus"
+                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+              >
+                Contact
+              </Link>
+              <Link
+                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                to="/about"
+              >
+                About
+              </Link>
             </div>
             <div className="flex justify-center md:block">
-              <Link to='/shopingcart' className="relative text-gray-700 hover:text-gray-600" >
+              <Link
+                to="/shopingcart"
+                className="relative text-gray-700 hover:text-gray-600"
+              >
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
@@ -74,7 +116,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
               </Link>
             </div>
             <a className="hover:text-gray-200" href="#">
-              <Link to='wishlist'>
+              <Link to="wishlist">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -101,7 +143,10 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                   name="search"
                   placeholder="Search"
                 />
-                <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+                <button
+                  type="submit"
+                  className="absolute right-0 top-0 mt-5 mr-4"
+                >
                   <svg
                     className="text-gray-600 h-4 w-4 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +169,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
 
             {isLoggedIn ? (
               <Link
-                to='/profile'
+                to="/profile"
                 className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               >
                 <img
@@ -134,12 +179,28 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                 />
               </Link>
             ) : (
-              <Link
-                to='/signup'
-                className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-              >
-                Sign in / sign up
-              </Link>
+              <>
+                <div className="flex flex-col">
+                  <Link
+                    className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                    onClick={handleLoginClick}
+                  >
+                    Sign in / sign up
+                  </Link>
+                  {isLogClick && (
+                    <div className="flex flex-col absolute right-28 top-16 border-2 rounded-lg border-blue-300 bg-slate-100 py-4 px-7">
+                      <Link to="/adminLogin" onClick={handleLoginClick}>
+                        <span>Login Admin</span>
+                      </Link>
+
+
+                      <Link to="/signup" onClick={handleLoginClick}>
+                        <span>Login User</span>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </>
             )}
 
             {isLoggedIn && (

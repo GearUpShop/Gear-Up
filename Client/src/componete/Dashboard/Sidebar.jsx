@@ -9,9 +9,8 @@ function Sidebar() {
             <div className="px-3 py-4 overflow-y-auto rounded bg-gray-200 dark:bg-gray-800">
               <ul className="space-y-2">
                 <li>
-                  <a
-                    href="#"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  <Link to="/dashboard/shoingStats"
+                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <svg
                       className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -23,7 +22,8 @@ function Sidebar() {
                       <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                     </svg>
                     <span className="ml-3">Dashboard</span>
-                  </a>
+                  
+                  </Link>
                 </li>
                 
                 <li>

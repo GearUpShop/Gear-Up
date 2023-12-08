@@ -8,11 +8,12 @@ import Dashbord from './Dashboard/Dashbord'
 
 function Home() {
   return (
-    <>
+    <div className="">
     <Herosection/>
-    <Categories/>
-    <FeaturedProducts/>
-    </>
+     <Categories/>
+    <FeaturedProducts/> 
+    </div>
+   
   )
 }
 
