@@ -2,6 +2,7 @@ import React from 'react'
 
 function FeaturedProducts() {
   return (
+    <>
     <div>
           <section className="flex items-center font-poppins dark:bg-gray-800 lg:h-auto">
   <div className="container p-4 mx-auto">
@@ -90,6 +91,7 @@ function FeaturedProducts() {
 </section>
 
     </div>
+    </>
   )
 }
 

@@ -6,6 +6,9 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [isLogClick, setIsLogClick] = useState(false);
 
+  // its Dropdown to see product
+  const [isDropdownOpen1, setDropdownOpen1] = useState(false);
+
   const navigate = useNavigate();
   ///////////
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -16,6 +19,15 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
       setIsLoggedIn(true);
     }
   });
+
+////////////////////////////////
+// its Dropdown to see product
+  const toggleDropdown = () => {
+    setDropdownOpen1(!isDropdownOpen1);
+  };
+  //////////////////////
+
+ 
 
   ///////////
   const handleMouseEnter = () => {
@@ -40,13 +52,13 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
 
   return (
     <div>
-      <nav className="bg-white shadow">
+      <nav className="bg-[#2B2A4C] shadow">
         <div className="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
           <div className="flex justify-between items-center">
             <div>
               <Link
                 to="/profile"
-                className="text-blue-700 text-xl font-bold md:text-2xl hover:text-gray-700"
+                className="text-white text-xl font-bold md:text-2xl hover:text-gray-700"
               >
                 GEAR UP SHOP
               </Link>
@@ -70,36 +82,163 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
             <div className="flex flex-col md:flex-row md:mx-6">
               <Link
                 to="/"
-                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                className="my-1 text-lg text-white font-medium hover:text-[#B31312] md:mx-4 md:my-0"
               >
-                HOME
+                Home
               </Link>
               <Link
                 to="/shopall"
-                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                className="my-1 text-lg text-white font-medium hover:text-[#B31312] md:mx-4 md:my-0"
               >
                 Shop
               </Link>
               <Link
                 to="/contactus"
-                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                className="my-1 text-lg text-white font-medium hover:text-[#B31312] md:mx-4 md:my-0"
               >
                 Contact
               </Link>
               <Link
-                className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+               className="my-1 text-lg text-white font-medium hover:text-[#B31312] md:mx-4 md:my-0"
                 to="/about"
               >
                 About
               </Link>
+
+
+
+
+
+{/* // its Dropdown to see product start */}
+                 
+      <div className="relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          className="inline-flex w-full justify-center gap-x-2  bg-white px-7 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          onClick={toggleDropdown}
+          id="menu-button"
+          aria-expanded={isDropdownOpen}
+          aria-haspopup="true"
+        >
+         Category
+          <svg
+            className="-mr-1 h-5 w-5 text-gray-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      {isDropdownOpen1 && (
+        <div
+          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabIndex={-1}
+        >
+          <div className="py-1" role="none">
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+              Clean
+          
+            </Link>
+
+
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+              Tools
+          
+            </Link>
+
+
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+            Mobile
+          
+            </Link>
+
+
+
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+              Light
+          
+            </Link>
+
+
+
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+              Clean
+          
+            </Link>
+
+
+
+            <Link to = '/clean'
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabIndex={-1}
+            >
+         
+              Clean
+          
+            </Link>
+
+
+
+           
+           
+          </div>
+        </div>
+      )}
+    </div>
+{/* // its Dropdown to see product end */}
+    
+
+             
             </div>
             <div className="flex justify-center md:block">
               <Link
                 to="/shopingcart"
-                className="relative text-gray-700 hover:text-gray-600"
+                className="relative text-white hover:text-[#B31312]"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-7 w-6"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,14 +251,14 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="absolute top-0 left-0 rounded-full bg-indigo-400 text-white p-1 text-xs" />
+                <span className="absolute top-0 left-0 rounded-full bg-white text-white p-1 text-xs" />
               </Link>
             </div>
-            <a className="hover:text-gray-200" href="#">
+            <a className="text-white hover:text-[#B31312]" href="#">
               <Link to="wishlist">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-7 w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -134,38 +273,8 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
               </Link>
             </a>
 
-            {/* This is an example component */}
-            <form className="md:ml-6 mt-4 md:mt-0">
-              <div className="pt-2 relative mx-auto text-gray-600">
-                <input
-                  className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                  type="search"
-                  name="search"
-                  placeholder="Search"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-0 top-0 mt-5 mr-4"
-                >
-                  <svg
-                    className="text-gray-600 h-4 w-4 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    id="Capa_1"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 56.966 56.966"
-                    style={{ enableBackground: "new 0 0 56.966 56.966" }}
-                    xmlSpace="preserve"
-                    width="512px"
-                    height="512px"
-                  >
-                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                  </svg>
-                </button>
-              </div>
-            </form>
+     
+         
 
             {isLoggedIn ? (
               <Link
@@ -182,7 +291,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
               <>
                 <div className="flex flex-col">
                   <Link
-                    className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                    className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-[#B31312] py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
                     onClick={handleLoginClick}
                   >
                     Sign in / sign up

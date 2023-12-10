@@ -8,7 +8,7 @@ function Light() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(' http://localhost:5002/category/Light');
+        const response = await axios.get(' http://localhost:5002/category/lights');
         console.log('Fetched data:', response.data);
         setProducts(response.data);
       } catch (error) {
