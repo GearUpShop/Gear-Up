@@ -1,12 +1,12 @@
 import React from 'react';
-import hero from '../Assest/Extreme Ride Logo Reveal_free.mp4';
+import hero from '../Assest/video2.mp4';
 
 function Herosection() {
   return (
     <div>
-      <div className="relative min-h-[70vh] flex items-center justify-center z-[-2]">
+      <div className="relative min-h-[70vh] flex items-center justify-center z-[-2] rounded-xl">
         <video
-          className="w-full h-full object-cover absolute top-0 left-0"
+          className="w-full h-full object-cover absolute top-0 left-0 rounded-xl" 
           autoPlay
           muted
           loop
