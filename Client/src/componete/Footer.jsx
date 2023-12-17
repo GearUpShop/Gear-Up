@@ -1,21 +1,29 @@
 import React from 'react'
 
 function Footer() {
+
+  const isHomePage =
+    window.location.pathname === "/dashboard" || window.location.pathname === "/dashboard/usertable"
+    || window.location.pathname === "/dashboard/adminProfile"
+    || window.location.pathname === "/dashboard/producttable"
+    || window.location.pathname === "/dashboard/addProduct"
+    || window.location.pathname === "/dashboard/shoingStats"
+     ;
   return (
-    <div>
+    <div className={`${isHomePage ? 'hidden' : ''}`}>
         <section className="flex flex-col h-auto lg:justify-end font-poppins">
-  <div className="w-full bg-blue-50 pt-11 dark:bg-gray-900 ">
+  <div className="w-full bg-[#2B2A4C] pt-11 dark:bg-gray-900 ">
     <div className="justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-0">
-      <div className="flex items-center justify-center pb-3 border-b border-gray-300 dark:border-gray-700 lg:justify-between">
+      <div className="flex items-center justify-center pb-3 border-b border-white dark:border-white lg:justify-between">
         <div className="hidden mr-12 lg:block">
-          <span className="text-gray-700 dark:text-gray-400">
+          <span className="text-white dark:text-white">
             Get connected with us
           </span>
         </div>
         <div className="flex justify-center ">
           <a
             href="#"
-            className="mr-6 text-gray-600 dark:text-gray-400 hover:text-blue-700"
+            className="mr-6 text-white dark:text-white hover:text-blue-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +38,7 @@ function Footer() {
           </a>
           <a
             href="#"
-            className="mr-6 text-gray-600 dark:text-gray-400 hover:text-blue-400"
+            className="mr-6 text-white dark:text-white hover:text-blue-400"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +53,7 @@ function Footer() {
           </a>
           <a
             href="#"
-            className="mr-6 text-gray-600 dark:text-gray-400 hover:text-red-600"
+            className="mr-6 text-white dark:text-white hover:text-red-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +68,7 @@ function Footer() {
           </a>
           <a
             href="#"
-            className="mr-6 text-gray-600 dark:text-gray-400 hover:text-blue-600"
+            className="mr-6 text-white dark:text-white hover:text-blue-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,24 +87,24 @@ function Footer() {
         <div className="w-full px-4 mb-11 md:w-1/2 lg:w-4/12 lg:mb-0">
           <a
             href="#"
-            className="inline-block mb-4 text-2xl font-bold dark:text-gray-400"
+            className="inline-block mb-4 text-2xl font-bold text-white"
           >
             Logo
           </a>
-          <p className="text-base font-normal leading-6 lg:w-64 dark:text-gray-400">
+          <p className="text-base font-normal leading-6 lg:w-64 text-white">
             Lorem ipsum dor amet Lorem ipsum dor amet Lorem ipsum dor Lorem
             ipsum dor amet Lorem ipsum dor amet Lorem ipsum dor
           </p>
         </div>
         <div className="w-full px-4 md:w-1/4 lg:w-2/12 mb-11 lg:mb-0">
-          <h2 className="mb-4 text-lg font-bold text-gray-800 dark:text-gray-400">
+          <h2 className="mb-4 text-lg font-bold text-white dark:text-white">
             Recent Posts
           </h2>
           <ul>
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 Home
               </a>
@@ -104,7 +112,7 @@ function Footer() {
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 About Us
               </a>
@@ -112,7 +120,7 @@ function Footer() {
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 Features
               </a>
@@ -120,14 +128,14 @@ function Footer() {
           </ul>
         </div>
         <div className="w-full px-4 mb-11 lg:mb-0 md:w-1/4 lg:w-2/12">
-          <h2 className="mb-4 text-base font-bold text-gray-800 dark:text-gray-400">
+          <h2 className="mb-4 text-base font-bold text-white text-white">
             Recent Posts
           </h2>
           <ul>
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 Home
               </a>
@@ -135,7 +143,7 @@ function Footer() {
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 About Us
               </a>
@@ -143,7 +151,7 @@ function Footer() {
             <li className="mb-4">
               <a
                 href="#"
-                className="inline-block text-base font-normal dark:text-gray-400"
+                className="inline-block text-base font-normal text-white"
               >
                 Features
               </a>
@@ -151,14 +159,14 @@ function Footer() {
           </ul>
         </div>
         <div className="w-full px-4 mb-2 lg:mb-0 md:w-1/3 lg:w-4/12">
-          <h2 className="mb-4 text-lg font-bold text-gray-800 dark:text-gray-400">
+          <h2 className="mb-4 text-lg font-bold text-white text-white">
             Newsletter
           </h2>
           <div className="flex flex-wrap">
             <div className="w-full py-1 mb-2 lg:flex-1 lg:py-0 lg:mr-3 lg:mb-0">
               <input
                 type="email "
-                className="inline-block w-full h-12 px-3 text-gray-700 placeholder-gray-500 border rounded-md dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-700 dark:bg-gray-700"
+                className="inline-block w-full h-12 px-3 text-white placeholder-white border rounded-md dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-700 dark:bg-gray-700"
                 placeholder="Your email"
               />
             </div>

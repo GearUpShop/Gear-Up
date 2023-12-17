@@ -117,16 +117,17 @@ function Categories() {
 
 <div>
   <>
-        <div className="flex flex-col justify-center items-center bg-[#EEE2DE] ">
-          <h1 className="text-4xl xl:text-5xl font-semibold leading-15 xl:leading-9 text-red-900 dark:text-white my-10">
+        <div className="flex flex-col justify-center items-center bg-gray-100">
+          <h1 className="pb-2 text-2xl font-bold text-center text-gray-800 md:text-4xl  dark:text-white my-5">
             Shop By Category
           </h1>
+          <div className="w-20 mx-auto mb-6 border-b border-black dark:border-gray-400" />
          </div>
-<div className="bg-[#EEE2DE] dark:bg-gray-800  py-6 sm:py-8 lg:py-12">
+<div className="bg-gray-100 dark:bg-gray-800  py-6 sm:py-8 lg:py-12 ">
   <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
     
  
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8 ">
       {/* image - start */}
      <Link to='/tools'
       className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
@@ -212,7 +213,7 @@ function Categories() {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
         <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
-          
+        Mobile
         </span>
       </a>
       {/* image - end */}
@@ -229,7 +230,7 @@ function Categories() {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
         <span className="relative ml-4 mb-3 inline-block text-5xl text-white md:ml-10 md:text-5xl">
-          Tech
+        Accessories
         </span>
       </a>
       {/* image - end */}

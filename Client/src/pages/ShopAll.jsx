@@ -233,7 +233,7 @@ function ShopAll() {
     }
   };
   return (
-    <div className="bg-stone-200">
+    <div className="bg-gray-100">
       <form onSubmit={handleSearchInput} className=" w-96">
         <label
           htmlFor="default-search"

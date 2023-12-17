@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Router } from 'react-router-dom';
 import './App.css';
 import NavBar from './componete/NavBar';
 import Home from './pages/Home';
@@ -29,8 +29,10 @@ function App() {
   const role = sessionStorage.getItem('role');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+ 
+
   return (
-    <AuthProvider>
+    <div>
       <BrowserRouter>
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
@@ -71,7 +73,10 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </AuthProvider>
+     
+    
+     
+      </div>
   );
 }
 

@@ -43,7 +43,7 @@ function Login({setIsLoggedIn}) {
 
   return (
     <div>
-      <section className="relative py-4 lg:py-11 font-poppins h-screen flex">
+      <section className="relative py-4 lg:py-11 font-poppins h-screen flex bg-stone-200">
         <div className="max-w-6xl px-1 mx-auto lg:px-6 flex ">
           <div className="flex flex-wrap items-center ">
             <div className="w-full lg:w-2/5">
@@ -96,7 +96,7 @@ function Login({setIsLoggedIn}) {
                     </span>
                   </div>
                   <button
-                    className="w-full px-4 py-4 mb-4 font-semibold text-base text-gray-200 bg-blue-500 rounded dark:bg-blue-500 hover:text-blue-200 "
+                    className="w-full px-6 py-4 mb-4 font-semibold text-base text-gray-200 bg-[#B31312] rounded dark:bg-blue-500 hover:text-blue-200 "
                     type="button"
                     onClick={handleLogin}
                   >
@@ -136,8 +136,8 @@ function Login({setIsLoggedIn}) {
             </div>
             <div className="hidden w-full px-10 mb-16 lg:w-1/2 lg:mb-0 lg:block">
               <div className="text-center">
-                <span className="text-2xl font-medium text-blue-600 dark:text-blue-400">
-                  Welcome
+                <span className="text-4xl font-medium text-blue-600 dark:text-blue-400">
+                Welcome to our store
                 </span>
                 <h2 className="mt-3 mb-6 text-4xl font-bold text-gray-800 dark:text-gray-400">
                   Join our community with your login credentials

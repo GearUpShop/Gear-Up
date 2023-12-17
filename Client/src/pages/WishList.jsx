@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('Token')}`;
 
 function WishList() {
   const { productId } = useParams();
   console.log('productId:', productId);
   const [product, setProduct] = useState([]);
-  
-  
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get('http://localhost:5002/wish  ');
+        const response = await axios.get('http://localhost:5002/wish');
         console.log('Fetched product:', response.data);
         setProduct(response.data);
       } catch (error) {
@@ -21,10 +21,9 @@ function WishList() {
     };
 
     fetchProduct();
-  }, [productId]);  
+  }, [productId]);
 
   const addToCart = () => {
-
     // Make a POST request to your shopping cart endpoint
     axios
       .post(`http://localhost:5002/add-to-cart/${productId}`)
@@ -35,12 +34,24 @@ function WishList() {
         console.error("Error adding product to cart: ", error);
       });
   };
-  
 
-  
-    if (!product) {
-      return <div>Loading...</div>;
-    }
+  const removeFromWishList = (productId) => {
+    // Make a DELETE request to remove the product from the wishlist
+    axios
+      .delete(`http://localhost:5002/remove-from-wishlist/${productId}`)
+      .then((response) => {
+        console.log("Product removed from wishlist:", response.data);
+        // Update the state to reflect the change in the wishlist
+        setProduct((prevProducts) => prevProducts.filter((item) => item.id !== productId));
+      })
+      .catch((error) => {
+        console.error("Error removing product from wishlist: ", error);
+      });
+  };
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -49,7 +60,7 @@ function WishList() {
           {product.map((product, index) => (
             <section
               key={index}
-              className="p-5 py-10 bg-purple-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer"
+              className="p-5 py-10 bg-purple-100 text-center transform duration-500 hover:-translate-y-2 cursor-pointer  "
             >
               <img src={product.imageUrl} alt={product.name} className="w-full h-64 object-cover mb-5" />
               <div className="space-x-1 flex justify-center mt-10">
@@ -69,16 +80,31 @@ function WishList() {
               <h1 className="text-3xl my-5">{product.name}</h1>
               <p className="mb-5">{product.description}</p>
               <h2 className="font-semibold mb-5">${product.price}</h2>
-              <button 
-               onClick={addToCart}
-              className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">
+              <button
+                onClick={addToCart}
+                className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600"
+              >
                 Add To Cart
+              </button>
+
+              <button
+                onClick={() => removeFromWishList(product.id)}
+                className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600 ml-2"
+              >
+                Remove from Wishlist
               </button>
             </section>
           ))}
         </section>
       </section>
     </div>
+
+
+
+
+
+
+
   );
 }
 
