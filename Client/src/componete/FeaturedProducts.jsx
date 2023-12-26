@@ -17,7 +17,7 @@ function FeaturedProducts() {
           className="relative w-full h-64 mb-6 bg-center bg-no-repeat bg-cover"
           style={{
             backgroundImage:
-              'url("https://i.postimg.cc/x8LtrkfV/kenny-eliason-HIz-Gn9-FZDFU-unsplash.jpg")'
+              'url("https://lzd-img-global.slatic.net/g/p/5764c322d14b7f10efb345f384758be7.jpg_360x360q75.jpg_.webp")'
           }}
         >
           <div className="absolute w-full h-full bg-gray-900 bg-opacity-60" />
@@ -42,7 +42,7 @@ function FeaturedProducts() {
           className="relative w-full h-64 mb-6 bg-center bg-no-repeat bg-cover"
           style={{
             backgroundImage:
-              'url("https://i.postimg.cc/2y4KXDFs/pexels-terje-sollie-320617.jpg")'
+              'url("https://im.rediff.com/travel-living/2017/mar/3d-car-auto-seat-back-multi-pocket-storage-bag-organizer-holder-hanger-accessory.jpg?w=670&h=900")'
           }}
         >
           <div className="absolute w-full h-full bg-gray-900 bg-opacity-60" />
@@ -52,7 +52,7 @@ function FeaturedProducts() {
           <a className="absolute inset-0 flex items-end" href="#">
             <div className="pb-12 pl-12">
               <h2 className="mb-2 text-3xl font-bold text-white ">
-                Bridge Camera
+              Car Backseat Organizer
               </h2>
               <p className="text-xl font-bold text-white ">
                 <span>$100.00</span>
@@ -67,7 +67,7 @@ function FeaturedProducts() {
           className="relative w-full h-64 mb-6 bg-center bg-no-repeat bg-cover"
           style={{
             backgroundImage:
-              'url("https://i.postimg.cc/CLWkvq6f/pexels-markus-spiske-1002638.jpg")'
+              'url("https://m.media-amazon.com/images/I/71llUV-0sOL._AC_SX466_.jpg")'
           }}
         >
           <div className="absolute w-full h-full bg-gray-900 bg-opacity-60" />
@@ -77,7 +77,7 @@ function FeaturedProducts() {
           <a className="absolute inset-0 flex items-end" href="#">
             <div className="pb-12 pl-12">
               <h2 className="mb-2 text-3xl font-bold text-white ">
-                DSLR Camera
+              Car Gear Shift Cover
               </h2>
               <p className="text-xl font-bold text-white ">
                 <span>$100.00</span>

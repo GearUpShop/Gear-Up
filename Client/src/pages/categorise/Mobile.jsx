@@ -8,7 +8,7 @@ function Mobile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(' http://localhost:5002/category/Light');
+        const response = await axios.get(' http://localhost:5002/category/mobile');
         console.log('Fetched data:', response.data);
         setProducts(response.data);
       } catch (error) {
@@ -22,8 +22,8 @@ function Mobile() {
   console.log('Products:', products);
 
   return (
-    <div>
-      <div className="text-center p-10">
+    <div className="bg-gray-100">
+      <div className="text-center p-10 ">
         <h1 className="font-bold text-4xl mb-4">Responsive Product card grid</h1>
         <h1 className="text-3xl">Tailwind CSS</h1>
       </div>

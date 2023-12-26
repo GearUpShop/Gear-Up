@@ -14,6 +14,8 @@ function Home() {
      <Categories/>
     
     <FeaturedProducts/> 
+    <FeaturedSection/>
+    
 
     
     

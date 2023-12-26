@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import AddProduct from '../../componete/Dashboard/AddProduct';
 import AdminProfile from '../../componete/Dashboard/AdminProfile';
 import ShoingStats from '../../componete/Dashboard/ShoingStats';
+import MessageTable from '../../componete/Dashboard/MessageTable';
 
 function Dashboard() {
   return (
@@ -21,6 +22,8 @@ function Dashboard() {
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/adminProfile" element={<AdminProfile />} />
           <Route path="/shoingStats" element={<ShoingStats />} />
+          <Route path="/messageTable" element={<MessageTable />} />
+
          
         
       </Routes>

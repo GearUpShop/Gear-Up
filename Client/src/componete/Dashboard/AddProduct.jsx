@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function AddProduct() {
   const [productData, setProductData] = useState({
@@ -23,34 +24,47 @@ function AddProduct() {
     e.preventDefault();
 
     try {
-      // إجراء طلب POST إلى النقطة النهائية
+      // Make a POST request to the endpoint
       const response = await axios.post('http://localhost:5002/add', productData);
 
-      // معالجة الاستجابة، على سبيل المثال، إظهار رسالة نجاح
-      console.log('Product added successfully:', response.data);
+      // Handle the response, for example, show a success message with SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Product added successfully',
+        showConfirmButton: false,
+        timer: 1500, // Close after 1.5 seconds
+      });
 
-      // تفريغ النموذج بعد التقديم الناجح
+      // Reset the form after successful submission
       setProductData({
         name: '',
         title: '',
         description: '',
         price: '',
-        category: '',// إعادة تعيين حقل الصنف
+        category: '',
         imageUrl: '',
       });
     } catch (error) {
-      // التعامل مع الأخطاء، على سبيل المثال، إظهار رسالة خطأ
+      // Handle errors, for example, show an error message with SweetAlert
+      Swal.fire({
+        icon: 'error',
+        title: 'Error adding product',
+        text: 'Something went wrong. Please try again later.',
+      });
       console.error('Error adding product:', error);
     }
   };
 
   return (
     <div>
-      <section className="items-center">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-5xl font-black">
+      
+        <div className=" flex justify-center ">
+        <form className="  m-4 p-10 bg-[#6c6e8e] rounded shadow-3xl border-4 border-[#686892]" onSubmit={handleSubmit} >
+          <div>
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-5xl font-black">
           Add Product
         </h1>
-        <form className="max-w-xl items-center" onSubmit={handleSubmit}>
+          </div>
           <div className="mb-6">
             <label
               htmlFor="name"
@@ -171,7 +185,7 @@ function AddProduct() {
             ADD product
           </button>
         </form>
-      </section>
+        </div>
     </div>
   );
 }

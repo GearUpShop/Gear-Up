@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-function AdminLogin({setIsLoggedIn}) {
+function AdminLogin({ setIsLoggedIn }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -22,15 +21,16 @@ function AdminLogin({setIsLoggedIn}) {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5002/logins', formData);
+      const response = await axios.post('http://localhost:5002/login', formData);
 
       // Assuming the token is returned in the response
       const authToken = response.data.authToken;
-      const userId = response.data.userId;
+      const role = response.data.role;
 
       // Save the token and user_id to cookies or localStorage
       Cookies.set('Token', authToken);
-      Cookies.set('user_id', userId);
+      // Cookies.set('user_id', userId);
+      sessionStorage.setItem('role',role);
       localStorage.setItem("Token",response.data.authToken);
       setIsLoggedIn(true)
       navigate('/dashboard');
@@ -102,15 +102,15 @@ function AdminLogin({setIsLoggedIn}) {
                     LOGIN
                   </button>
                   
-  <button className=" w-full px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
-    <img
-      className="w-6 h-6"
-      src="https://www.svgrepo.com/show/475656/google-color.svg"
-      loading="lazy"
-      alt="google logo"
-    />
-    <span>Login with Google</span>
-  </button>
+                  <button className=" w-full px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+                    <img
+                      className="w-6 h-6"
+                      src="https://www.svgrepo.com/show/475656/google-color.svg"
+                      loading="lazy"
+                      alt="google logo"
+                    />
+                    <span>Login with Google</span>
+                  </button>
 
                   <div className="mb-4 text-center">
                     <a
@@ -146,7 +146,6 @@ function AdminLogin({setIsLoggedIn}) {
                 </p>
               </div>
             </div>
-            
           </div>
         </div>
       </section>

@@ -47,27 +47,27 @@ function Login({setIsLoggedIn}) {
         <div className="max-w-6xl px-1 mx-auto lg:px-6 flex ">
           <div className="flex flex-wrap items-center ">
             <div className="w-full lg:w-2/5">
-              <div className="bg-white shadow-lg dark:bg-gray-900 p-11 ">
+              <div className="bg-[#6c6e8e] shadow-lg dark:bg-gray-900 p-11 ">
                 <form action="" className="">
                   <div className="text-center mb-7">
-                    <span className="inline-block mb-3 font-semibold text-base text-blue-500">
+                    <span className="inline-block mb-3 font-semibold text-base text-white">
                       Login
                     </span>
-                    <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-300">
+                    <h2 className="text-3xl font-bold text-white dark:text-white">
                       Join our community
                     </h2>
                   </div>
                   <div className="relative flex flex-wrap mb-5">
                     <input
                       type="email"
-                      className="relative w-full py-4 pl-4 mb-2 text-sm border rounded dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700 md:mb-0"
+                      className="relative w-full py-4 pl-4 mb-2 text-sm border rounded dark:text-black dark:border-gray-700 dark:bg-gray-700 md:mb-0"
                       placeholder="e.g:info@gmail.com"
                       required=""
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                     />
-                    <span className="absolute top-0 left-0 inline-block px-1 ml-4 -mt-2 text-xs text-gray-500 bg-white dark:text-gray-300 dark:bg-gray-800">
+                    <span className="absolute top-0 left-0 inline-block px-1 ml-4 -mt-2 text-xs text-black bg-[#a7a9c9] dark:text-gray-300 dark:bg-gray-800">
                       Email address
                     </span>
                   </div>
@@ -91,7 +91,7 @@ function Login({setIsLoggedIn}) {
                     >
                       {/* ... your eye icon path ... */}
                     </svg>
-                    <span className="absolute top-0 left-0 inline-block px-1 ml-4 -mt-2 text-xs text-gray-500 bg-white dark:text-gray-300 dark:bg-gray-800">
+                    <span className="absolute top-0 left-0 inline-block px-1 ml-4 -mt-2 text-xs text-black bg-[#a7a9c9] dark:text-gray-300 dark:bg-gray-800">
                       Password
                     </span>
                   </div>
@@ -103,7 +103,7 @@ function Login({setIsLoggedIn}) {
                     LOGIN
                   </button>
                   
-  <button className=" w-full px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+  <button className=" w-full px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150 bg-white">
     <img
       className="w-6 h-6"
       src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -156,3 +156,12 @@ function Login({setIsLoggedIn}) {
 }
 
 export default Login;
+
+
+
+
+
+
+
+
+
