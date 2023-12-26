@@ -26,6 +26,7 @@ function WishList() {
   }, [productId]);
 
   const addToCart = (productId) => {
+    console.log(productId);
     axios
       .post(`http://localhost:5002/add-to-cart/${productId}`)
       .then((response) => {
@@ -41,6 +42,7 @@ function WishList() {
       })
       .catch((error) => {
         console.error("Error adding product to cart: ", error);
+        console.log(productId);
       });
   };
 
