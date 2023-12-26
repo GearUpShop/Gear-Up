@@ -123,7 +123,7 @@ function WishList() {
                   </button>
 
                   <button
-                    onClick={() => removeFromWishList(product.id)}
+                    onClick={() => removeFromWishList(product.productId)}
                     className="p-2 px-6 bg-[#28365f94] text-white rounded-md hover:bg-[#28365fc0] mt-2"
                   >
                     Remove

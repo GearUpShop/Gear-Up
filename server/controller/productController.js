@@ -550,7 +550,26 @@ exports.removeProductFromFavorites = async (req, res) => {
   }
 };
 
+exports.getTopSellingProducts = async (req, res) => {
+  try {
+    const topSellingProducts = await Product.find({ isTopSelling: true });
 
+    res.json(topSellingProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+exports.getEightProducts = async (req, res) => {
+  try {
+    const eightProducts = await Product.find().limit(8);
+
+    res.json(eightProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
 
