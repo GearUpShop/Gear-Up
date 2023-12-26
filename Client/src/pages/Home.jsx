@@ -2,7 +2,8 @@ import React from 'react'
 import Herosection from '../componete/Herosection'
 import Categories from '../componete/Categories'
 import FeaturedProducts from '../componete/FeaturedProducts'
-import Dashbord from './Dashboard/Dashbord'
+
+import FeaturedSection from '../componete/FeaturedSection'
 
 
 
@@ -13,6 +14,9 @@ function Home() {
      <Categories/>
     
     <FeaturedProducts/> 
+
+    
+    
     
     </div>
    

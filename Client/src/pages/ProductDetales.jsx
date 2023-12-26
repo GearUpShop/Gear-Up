@@ -93,7 +93,7 @@ const addToCart = () => {
               <div className="w-1/2 px-2">
                 <button
                   onClick={addToCart}
-                  className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
+                  className="w-full bg-[#B31312] dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   Add to Cart
                 </button>
@@ -101,7 +101,7 @@ const addToCart = () => {
               <div className="w-1/2 px-2">
                 <button
                 onClick={addWishList}
-                  className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600"
+                  className="w-full bg-gray-400 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600"
                 >
                   Add to Wishlist
                 </button>

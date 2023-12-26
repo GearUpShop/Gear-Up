@@ -4,12 +4,13 @@ function FeaturedProducts() {
   return (
     <>
     <div>
-          <section className="flex items-center font-poppins dark:bg-gray-800 lg:h-auto">
+          <section className="flex items-center font-poppins bg-gray-100 lg:h-auto">
   <div className="container p-4 mx-auto">
     <h2 className="pb-2 text-2xl font-bold text-center text-gray-800 md:text-4xl dark:text-gray-400">
-      Featured Products
+    Top  rated
     </h2>
-    <div className="w-20 mx-auto mb-6 border-b border-red-700 dark:border-gray-400" />
+    <div className="w-20 mx-auto mb-6 border-b border-black dark:border-gray-400" />
+
     <div className="flex flex-wrap mb-20 -mx-3">
       <div className="w-full px-3 mb-6 lg:w-1/3 lg:mb-0">
         <div
