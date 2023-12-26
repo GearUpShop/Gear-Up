@@ -15,7 +15,6 @@ router.get('/details/:productId', productController.getProductWithImage);
 router.post('/add-to-cart/:productId',authorization.authorize ,productController.addToCart);
 router.post('/add-to-wishlist/:productId',authorization.authorize ,productController.addToWishlist);
 router.post('/carts',authorization.authorize ,productController.getAllCarts);
-
 router.get('/det/:productId', productController.getProductDetails);
 router.get('/Car',authorization.authorize, productController.getCartProducts);
 router.delete('/cart/:productId',authorization.authorize ,productController.deleteProductFromCart);
@@ -23,5 +22,6 @@ router.get('/wish',authorization.authorize, productController.getwishlistProduct
 router.get('/category/:category', productController.getProductsByCategory);
 router.post('/add', productController.addNewProduct);
 router.delete('/delete/:productId', productController.softDeleteProduct);
+router.put('/product/:productId',authorization.authorize ,productController.removeProductFromFavorites);
 
 module.exports = router;

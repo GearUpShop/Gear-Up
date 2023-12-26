@@ -530,4 +530,20 @@ exports.softDeleteProduct = async (req, res) => {
   }
 };
 
+exports.removeProductFromFavorites = async (req, res) => {
+  try {
+    const  userId = req.user._id;   
+     const productId = req.params.productId;
 
+    const result = await Wishlist.findOneAndDelete({ userId, productId });
+
+    if (!result) {
+      return res.status(404).json({ error: 'Product not found in favorites' });
+    }
+
+    res.json({ message: 'Product removed from favorites successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

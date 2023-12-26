@@ -6,7 +6,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true },
     profileImage: { type: String },
-    role: { type: String, enum: ['user', 'admin'], default: 'admin' },
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
     isDeleted: { type: Boolean, default: false, required: true  },
 
 });
