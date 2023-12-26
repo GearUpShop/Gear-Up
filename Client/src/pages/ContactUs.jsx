@@ -49,8 +49,7 @@ function ContactUs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
           <h2 className="text-4xl font-bold">Contact</h2>
           <p className="pt-6 pb-6 text-base max-w-2xl text-center m-auto dark:text-neutral-400">
-            Want to contact us? Choose an option below, and we'll be happy to show you
-            how we can transform your company's web experience.
+          Send your message and we will respond to you as soon as possible
           </p>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
@@ -94,7 +93,7 @@ function ContactUs() {
                   d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                 ></path>
               </svg>
-              <a href="mailto:hello@company.com">hello@company.com</a>
+              <a href="mailto:hello@company.com">gearuoshop@gmail.com</a>
             </div>
             <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-neutral-400">
               <svg
@@ -161,7 +160,7 @@ function ContactUs() {
               </div>
               <button
                 type="submit"
-                className="w-full py-4 font-semibold text-white transition-colors bg-neutral-900 rounded-md hover:bg-neutral-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-neutral-200 px-7 dark:bg-white dark:text-black "
+                className="w-full py-4 font-semibold text-white transition-colors bg-[#B31312] rounded-md hover:bg-neutral-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-neutral-200 px-7 dark:bg-white dark:text-black "
               >
                 Send Message
               </button>

@@ -8,6 +8,7 @@ function Footer() {
     || window.location.pathname === "/dashboard/producttable"
     || window.location.pathname === "/dashboard/addProduct"
     || window.location.pathname === "/dashboard/shoingStats"
+    || window.location.pathname === "/dashboard/messageTable"
      ;
   return (
     <div className={`${isHomePage ? 'hidden' : ''}`}>
@@ -182,7 +183,7 @@ function Footer() {
         </div>
       </div>
     </div>
-    <div className="py-6 text-center bg-blue-200 dark:bg-gray-800 dark:text-gray-400">
+    <div className="py-6 text-center bg-[#B31312] dark:bg-gray-800 text-white">
 
 
 

@@ -28,8 +28,6 @@
 //   };
 //   //////////////////////
 
- 
-
 //   ///////////
 //   const handleMouseEnter = () => {
 //     setDropdownOpen(true);
@@ -107,12 +105,8 @@
 //                 About
 //               </Link>
 
-
-
-
-
 // {/* // its Dropdown to see product start */}
-                 
+
 //       <div className="relative inline-block text-left">
 //       <div>
 //         <button
@@ -153,11 +147,10 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
-//               Clean
-          
-//             </Link>
 
+//               Clean
+
+//             </Link>
 
 //             <Link to = '/tools'
 //               href="#"
@@ -165,11 +158,10 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
-//               Tools
-          
-//             </Link>
 
+//               Tools
+
+//             </Link>
 
 //             <Link to = '/mobile'
 //               href="#"
@@ -177,12 +169,10 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
+
 //             Mobile
-          
+
 //             </Link>
-
-
 
 //             <Link to = '/light'
 //               href="#"
@@ -190,12 +180,10 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
+
 //               Light
-          
+
 //             </Link>
-
-
 
 //             <Link to = '/seafety '
 //               href="#"
@@ -203,12 +191,10 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
-//          Seafety 
-          
+
+//          Seafety
+
 //             </Link>
-
-
 
 //             <Link to = '/accessories'
 //               href="#"
@@ -216,9 +202,9 @@
 //               role="menuitem"
 //               tabIndex={-1}
 //             >
-         
+
 //          Accessories
-          
+
 //             </Link>
 
 //           </div>
@@ -226,9 +212,7 @@
 //       )}
 //     </div>
 // {/* // its Dropdown to see product end */}
-    
 
-             
 //             </div>
 //             <div className="flex justify-center md:block">
 //               <Link
@@ -271,9 +255,6 @@
 //               </Link>
 //             </a>
 
-     
-         
-
 //             {isLoggedIn ? (
 //               <Link
 //                 to="/profile"
@@ -299,7 +280,6 @@
 //                       <Link to="/adminLogin" onClick={handleLoginClick}>
 //                         <span>Login Admin</span>
 //                       </Link>
-
 
 //                       <Link to="/signup" onClick={handleLoginClick}>
 //                         <span>Login User</span>
@@ -327,38 +307,6 @@
 
 // export default NavBar;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -371,7 +319,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const [isDropdownOpen1, setDropdownOpen1] = useState(false);
 
   const navigate = useNavigate();
-     const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("Token");
@@ -391,38 +339,32 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
     navigate("/");
   };
 
+  //////////////////////////////
+  //its Dropdown to see product
+  const toggleDropdown = () => {
+    setDropdownOpen1(!isDropdownOpen1);
+  };
+  //////////////////////
 
-//////////////////////////////
-//its Dropdown to see product
-const toggleDropdown = () => {
-  setDropdownOpen1(!isDropdownOpen1);
-};
-//////////////////////
+  ///////////
+  const handleMouseEnter = () => {
+    setDropdownOpen(true);
+  };
 
+  const handleMouseLeave = () => {
+    setDropdownOpen(false);
+  };
 
-
-///////////
-const handleMouseEnter = () => {
-  setDropdownOpen(true);
-};
-
-const handleMouseLeave = () => {
-  setDropdownOpen(false);
-};
-
-
-const isHomePage =
-    window.location.pathname === "/dashboard" || window.location.pathname === "/dashboard/usertable"
-    || window.location.pathname === "/dashboard/adminProfile"
-    || window.location.pathname === "/dashboard/producttable"
-    || window.location.pathname === "/dashboard/addProduct"
-    || window.location.pathname === "/dashboard/shoingStats"
-     ;
-    
-    
-
+  const isHomePage =
+    window.location.pathname === "/dashboard" ||
+    window.location.pathname === "/dashboard/usertable" ||
+    window.location.pathname === "/dashboard/adminProfile" ||
+    window.location.pathname === "/dashboard/producttable" ||
+    window.location.pathname === "/dashboard/addProduct" ||
+    window.location.pathname === "/dashboard/shoingStats" ||
+    window.location.pathname === "/dashboard/messageTable";
   return (
-    <div className={`${isHomePage ? 'hidden' : ''}`}>
+    <div className={`${isHomePage ? "hidden" : ""}`}>
       <nav className="bg-[#2B2A4C] shadow">
         <div className="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
           <div className="flex justify-between items-center">
@@ -450,7 +392,11 @@ const isHomePage =
               </button>
             </div>
           </div>
-          <div className={`md:flex items-center  mr-20 ${isMobileMenuOpen ? "block" : "hidden"}`}>
+          <div
+            className={`md:flex items-center  mr-20 ${
+              isMobileMenuOpen ? "block" : "hidden"
+            }`}
+          >
             <div className="flex flex-col md:flex-row md:mx-6">
               <Link
                 to="/"
@@ -477,122 +423,107 @@ const isHomePage =
                 About
               </Link>
             </div>
-           {/* // its Dropdown to see product start */}
-                 
-      <div className="relative inline-block text-left">
-      <div>
-        <button
-          type="button"
-          className="inline-flex w-full justify-center gap-x-2  bg-white px-7 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          onClick={toggleDropdown}
-          id="menu-button"
-          aria-expanded={isDropdownOpen}
-          aria-haspopup="true"
-        >
-         Category
-          <svg
-            className="-mr-1 h-5 w-5 text-gray-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-      {isDropdownOpen1 && (
-        <div
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="menu-button"
-          tabIndex={-1}
-        >
-          <div className="py-1" role="none">
-            <Link to = '/clean'
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-              Clean
-          
-            </Link>
+            {/* // its Dropdown to see product start */}
 
+            <div className="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  className="inline-flex w-full justify-center gap-x-2 px-7 py-1 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-[#50538f]  hover:bg-[#545793] rounded-md  bg-[#414473]"
+                  onClick={toggleDropdown}
+                  id="menu-button"
+                  aria-expanded={isDropdownOpen}
+                  aria-haspopup="true"
+                >
+                  Category
+                  <svg
+                    className="-mr-1 h-5 w-5 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              {isDropdownOpen1 && (
+                <div
+                  className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                  tabIndex={-1}
+                >
+                  <div className="py-1" role="none">
+                    <Link
+                      to="/clean"
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Clean
+                    </Link>
 
-            <Link to = '/tools'
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-              Tools
-          
-            </Link>
+                    <Link
+                      to="/tools"
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Tools
+                    </Link>
 
+                    <Link
+                      to="/mobile"
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Mobile
+                    </Link>
 
-            <Link to = '/mobile'
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-            Mobile
-          
-            </Link>
+                    <Link
+                      to="/light"
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Light
+                    </Link>
 
+                    <Link
+                      to="/seafety "
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Seafety
+                    </Link>
 
+                    <Link
+                      to="/accessories"
+                      href="#"
+                      className="text-gray-700 block px-4 py-2 text-sm"
+                      role="menuitem"
+                      tabIndex={-1}
+                    >
+                      Accessories
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
-            <Link to = '/light'
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-              Light
-          
-            </Link>
-
-
-
-            <Link to = '/seafety '
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-         Seafety 
-          
-            </Link>
-
-
-
-            <Link to = '/accessories'
-              href="#"
-              className="text-gray-700 block px-4 py-2 text-sm"
-              role="menuitem"
-              tabIndex={-1}
-            >
-         
-         Accessories
-          
-            </Link>
-
-          </div>
-        </div>
-      )}
-    </div>
-
-    <div className="flex justify-center  ml-32  ">
+            <div className="flex justify-start sm:justify-start md:justify-start lg:justify-center  ml-2 sm:ml-2 md:ml-10 lg:ml-32 py-4 ">
               <Link
                 to="/shopingcart"
                 className="relative text-white hover:text-[#B31312]"
@@ -615,81 +546,71 @@ const isHomePage =
               </Link>
 
               <a className="text-white hover:text-[#B31312]">
-<Link to="wishlist">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-    />
-  </svg>
-</Link>
-</a>
+                <Link to="wishlist">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </Link>
+              </a>
             </div>
 
-
-
-            
- 
-
-
-             {isLoggedIn ? (
-               <Link
-                 to="/profile"
-                className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+            {isLoggedIn ? (
+              <Link
+                to="/profile"
+                // className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               >
-                 <img
+                <img
                   src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                   alt="Profile"
-                  className="w-8 h-8 rounded-full"
+                  className="w-8 h-8 rounded-full ml-10"
                 />
-               </Link>
-             ) : (
+              </Link>
+            ) : (
               <>
                 <div className="flex flex-col mr-30 ml-10">
-                   <Link
-                     className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-[#B31312] py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                  <Link
+                    className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-[#B31312] py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02] "
                     onClick={handleLoginClick}
                   >
                     Sign in
-                   </Link>
+                  </Link>
                   {isLogClick && (
                     <div className="flex flex-col absolute right-28 top-16 border-2 rounded-lg border-blue-300 bg-slate-100 py-4 px-7">
                       <Link to="/adminLogin" onClick={handleLoginClick}>
-                         <span>Login Admin</span>
-                       </Link>
+                        <span>Login Admin</span>
+                      </Link>
 
-
-                       <Link to="/signup" onClick={handleLoginClick}>
+                      <Link to="/signup" onClick={handleLoginClick}>
                         <span>Login User</span>
                       </Link>
                     </div>
                   )}
-                 </div>
-               </>
-             )}
+                </div>
+              </>
+            )}
 
-             {isLoggedIn && (
+            {isLoggedIn && (
+              
               <button
-                 onClick={handleLogout}
-                 className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-red-500 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                onClick={handleLogout}
+                className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-[#B31312] py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               >
                 Logout
               </button>
-             )} 
-
-
-   
-    </div>
-{/* // its Dropdown to see product end */}
-
+            )}
+          </div>
+          {/* // its Dropdown to see product end */}
         </div>
       </nav>
     </div>
@@ -697,5 +618,3 @@ const isHomePage =
 }
 
 export default NavBar;
-
-

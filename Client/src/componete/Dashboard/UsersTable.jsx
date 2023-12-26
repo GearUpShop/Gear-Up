@@ -11,7 +11,6 @@ function UsersTable() {
     try {
       const response = await axios.get('http://localhost:5002/users');
       setUsers(response.data.users);
-      
     } catch (error) {
       console.error('حدث خطأ في جلب البيانات:', error);
     }
@@ -39,9 +38,11 @@ function UsersTable() {
 
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, []);
+  console.log(user.length);
+
   return (
-    <div className="text-gray-900 bg-blue-200 overflow-hidden">
+    <div className="text-gray-900 ">
       <div className="p-4 flex">
         <h1 className="text-3xl">Users</h1>
       </div>

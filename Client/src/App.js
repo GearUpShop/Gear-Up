@@ -30,6 +30,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
  
+  const handleLogin = () => {
+    // Update the state in the App component
+    setIsLoggedIn(true);
+  };
 
   return (
     <div>
@@ -57,7 +61,7 @@ function App() {
           <Route path='/accessories' element={<Accessories />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/wishlist' element={<WishList />} />
-          <Route path='/adminLogin' element={<AdminLogin />} />
+          <Route path='/adminLogin' element={<AdminLogin setIsLoggedIn={setIsLoggedIn}/>} />
          
 
           <Route

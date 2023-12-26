@@ -234,7 +234,14 @@ function ShopAll() {
   };
   return (
     <div className="bg-gray-100">
-      <form onSubmit={handleSearchInput} className=" w-96">
+    
+
+      <div className="text-center p-10">
+        <h1 className="font-bold text-4xl mb-4">
+          All products needed for your car
+        </h1>
+       <div className="flex flex-row justify-center">
+       <form onSubmit={handleSearchInput} className=" w-96">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -271,18 +278,14 @@ function ShopAll() {
           />
           <button
             type="submit"
-            className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white absolute end-2.5 bottom-2.5 bg-[#2B2A4C] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Search
           </button>
         </div>
       </form>
-
-      <div className="text-center p-10">
-        <h1 className="font-bold text-4xl mb-4">
-          All products needed for your car
-        </h1>
-        <h1 className="text-3xl">Tailwind CSS</h1>
+       </div>
+     
       </div>
 
       <section
@@ -339,13 +342,13 @@ function ShopAll() {
         ))}
       </section>
 
-      <div className="flex items-center justify-center">
-        <nav aria-label="Page navigation example">
+      <div className="flex items-center justify-center py-20">
+        <nav aria-label="Page navigation example ">
           <ul className="inline-flex -space-x-px text-sm">
             <li>
               <a
                 href="#"
-                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-white bg-[#2B2A4C] border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
               >
@@ -375,7 +378,7 @@ function ShopAll() {
             <li>
               <a
                 href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#2B2A4C] border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 onClick={() => paginate(currentPage + 1)}
                 disabled={
                   currentPage === Math.ceil(products.length / productsPerPage)

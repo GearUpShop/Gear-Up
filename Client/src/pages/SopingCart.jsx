@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import Swal from 'sweetalert2';
 
 function ShoppingCart() {
   // const [cartItem, setCartItems] = useState([]);
@@ -79,6 +80,17 @@ function ShoppingCart() {
   )}`;
 
   const handleRemoveItem = async (productId) => {
+     // Show a confirmation dialog
+     const result = await Swal.fire({
+      title: 'Remove Item',
+      text: 'Are you sure you want to remove this item from your shopping cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!',
+    });
+    if (result.isConfirmed) {
     try {
       console.log(productId);
       // Make an Axios delete request to remove the item with itemId
@@ -113,6 +125,7 @@ function ShoppingCart() {
     } catch (error) {
       console.error("Error removing item:", error);
     }
+  }
   };
 
   return (
