@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./Routes/authRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const contactUsRoutes = require('./Routes/contactUsRoutes');
+const orderRoutes = require('./Routes/orderRoutes');
 const cors = require('cors');
 
 
@@ -70,6 +71,7 @@ app.use(cookieParser());
 app.use(authRoutes);
 app.use(productRoutes);
 app.use(contactUsRoutes);
+app.use(orderRoutes);
 
 const PORT = 5002;
 app.listen(PORT, () => {

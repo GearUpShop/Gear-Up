@@ -93,7 +93,7 @@ function WishList() {
                   <button className="p-2 px-6 text-white rounded-md text-start">
                     <Link
                       className="relative text-white hover:text-[#B31312]"
-                      onClick={() => addToCart(product.productId)}
+                      onClick={() => addToCart(product.id)}
                     >
                       <svg
                         className="h-7 w-6"

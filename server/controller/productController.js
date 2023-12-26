@@ -388,8 +388,7 @@ exports.getProductDetails = async (req, res) => {
         try {
             const  userId = req.user._id;
             const productId = req.params.productId; 
-            console.log("userId", userId ,productId)
-          // Find the cart item to delete
+       
           const cartItem = await Cart.findOneAndDelete({ userId, 'productId': productId });
       
           if (!cartItem) {
@@ -530,20 +529,50 @@ exports.softDeleteProduct = async (req, res) => {
   }
 };
 
+
+
+
 exports.removeProductFromFavorites = async (req, res) => {
   try {
-    const  userId = req.user._id;   
-     const productId = req.params.productId;
+      const  userId = req.user._id;
+      const productId = req.params.productId; 
+ 
+    const cartItem = await Wishlist.findOneAndDelete({ userId, 'productId': productId });
 
-    const result = await Wishlist.findOneAndDelete({ userId, productId });
-
-    if (!result) {
-      return res.status(404).json({ error: 'Product not found in favorites' });
+    if (!cartItem) {
+      return res.status(404).json({ message: 'Product not found in the cart' });
     }
 
-    res.json({ message: 'Product removed from favorites successfully' });
+    res.json({ message: 'Product successfully removed from the cart' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+exports.getTopSellingProducts = async (req, res) => {
+  try {
+    const topSellingProducts = await Product.find({ isTopSelling: true });
+
+    res.json(topSellingProducts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+exports.getEightProducts = async (req, res) => {
+  try {
+    const eightProducts = await Product.find().limit(8);
+
+    res.json(eightProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+
+

@@ -22,6 +22,8 @@ router.get('/wish',authorization.authorize, productController.getwishlistProduct
 router.get('/category/:category', productController.getProductsByCategory);
 router.post('/add', productController.addNewProduct);
 router.delete('/delete/:productId', productController.softDeleteProduct);
-router.put('/product/:productId',authorization.authorize ,productController.removeProductFromFavorites);
+router.delete('/product/:productId',authorization.authorize ,productController.removeProductFromFavorites);
+router.get('/topselling', productController.getTopSellingProducts);
+router.get('home', productController.getEightProducts);
 
 module.exports = router;
